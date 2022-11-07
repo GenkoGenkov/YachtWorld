@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace YachtWorld.Data
+namespace YachtWorld.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

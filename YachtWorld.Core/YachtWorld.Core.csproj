@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YachtWorld.Infrastructure\YachtWorld.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

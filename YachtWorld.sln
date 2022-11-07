@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YachtWorld", "YachtWorld\YachtWorld.csproj", "{31F9302A-20E1-4D18-B97E-8CC1F4402355}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YachtWorld.Core", "YachtWorld.Core\YachtWorld.Core.csproj", "{C8C11B97-8663-4337-9AFF-C28A7869115F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YachtWorld.Infrastructure", "YachtWorld.Infrastructure\YachtWorld.Infrastructure.csproj", "{A817BF11-AFF8-4F04-98F2-4769DCA97591}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{31F9302A-20E1-4D18-B97E-8CC1F4402355}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31F9302A-20E1-4D18-B97E-8CC1F4402355}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31F9302A-20E1-4D18-B97E-8CC1F4402355}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8C11B97-8663-4337-9AFF-C28A7869115F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8C11B97-8663-4337-9AFF-C28A7869115F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8C11B97-8663-4337-9AFF-C28A7869115F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8C11B97-8663-4337-9AFF-C28A7869115F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A817BF11-AFF8-4F04-98F2-4769DCA97591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A817BF11-AFF8-4F04-98F2-4769DCA97591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A817BF11-AFF8-4F04-98F2-4769DCA97591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A817BF11-AFF8-4F04-98F2-4769DCA97591}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
