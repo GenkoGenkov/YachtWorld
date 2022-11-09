@@ -12,8 +12,8 @@ using YachtWorld.Infrastructure.Data;
 namespace YachtWorld.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221109145227_CreatingUserYachtBrokerCategoryAndYacht")]
-    partial class CreatingUserYachtBrokerCategoryAndYacht
+    [Migration("20221109181252_SeedingData")]
+    partial class SeedingData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,15 +145,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8c32c8d1-df00-487b-8970-139c9e5c4ad6",
+                            ConcurrencyStamp = "2b46f2e9-e9cb-4ec7-9296-6edcddbe6f7c",
                             Email = "yachtBroker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "yachtBroker@mail.com",
-                            NormalizedUserName = "yachtBroker@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE1knQK0GfuCW6Sv3VjCnImXXxqI5Cqj4Zb7aqIFQTYiuCLYQ+bUzSrsEBrbHfDXxA==",
+                            NormalizedEmail = "YACHTBROKER@MAIL.COM",
+                            NormalizedUserName = "YACHTBROKER@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN04lwLOuEdvYbAFRO+voFCkaa0jznSs5i1TgjW5ixKS04HPUPjl5yHAu9PLuFzjig==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e660fc40-70de-49d9-9d9e-b1cc1c393d8c",
+                            SecurityStamp = "cdd3640b-951a-4929-9111-08ae35064492",
                             TwoFactorEnabled = false,
                             UserName = "yachtBroker@mail.com"
                         },
@@ -161,15 +161,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a7e814d-182a-42ab-a885-26d5b36c7cbc",
+                            ConcurrencyStamp = "81e15583-4019-495a-9507-fe9f72b9b9f4",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "guest@mail.com",
-                            NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIgxRhzFJrkORTyIfsurKBrjPpvCNyv7dzBJZu3SQkbDB8V2u7kc4ezCO8nTzBsUQw==",
+                            NormalizedEmail = "GUEST@MAIL.COM",
+                            NormalizedUserName = "GUEST@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPhjWmXQWPz5+mE+d+pzvYMbsSH1GUMsCNMYlrwRUSnM0gaNBqLiP6Gglppzp7IgsQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1596bdc1-ce8c-4a06-b87e-feea1ea8cf63",
+                            SecurityStamp = "ce6caeb8-ab23-4041-96b9-89bed4bf5b80",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -350,6 +350,77 @@ namespace YachtWorld.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Shipyards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EstablishedIn = 1980,
+                            Location = "New Zealand",
+                            Name = "Alloy Yachts"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EstablishedIn = 1918,
+                            Location = "Germany",
+                            Name = "Amels Yachts"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EstablishedIn = 1969,
+                            Location = "Italy",
+                            Name = "Azimut Yachts"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EstablishedIn = 1854,
+                            Location = "Port of Genova",
+                            Name = "Baglietto"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EstablishedIn = 1873,
+                            Location = "Italy",
+                            Name = "Benetti Yachts"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EstablishedIn = 1863,
+                            Location = "USA",
+                            Name = "Burger"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Location = "Vancouver Washington",
+                            Name = "Cristensen Yachts"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EstablishedIn = 1825,
+                            Location = "Italy",
+                            Name = "Codecasa Yachts"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EstablishedIn = 1919,
+                            Location = "Holland",
+                            Name = "Hakvoort Yachts"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EstablishedIn = 1960,
+                            Location = "Brazil",
+                            Name = "Inace"
+                        });
                 });
 
             modelBuilder.Entity("YachtWorld.Infrastructure.Data.Yacht", b =>

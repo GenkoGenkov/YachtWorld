@@ -23,12 +23,6 @@ namespace YachtWorld.Infrastructure.Data
 
         public int? EstablishedIn { get; set; }
 
-        [Required]
-        public int YachtId { get; set; }
-
-        [ForeignKey(nameof(YachtId))]
-        public Yacht Yacht { get; set; } = null!;
-
         public List<Yacht> Yachts { get; set; }
     }
 }

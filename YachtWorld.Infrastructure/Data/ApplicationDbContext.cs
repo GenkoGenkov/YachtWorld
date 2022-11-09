@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Reflection.Emit;
 using YachtWorld.Infrastructure.Data.Configuration;
 
@@ -14,7 +15,16 @@ namespace YachtWorld.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-                           ;
+            builder.Entity<Yacht>()
+            .HasOne(s => s.Shipyard)
+            .WithMany(y => y.Yachts)
+            .HasForeignKey(s => s.ShipyardId);
+
+            builder.Entity<Yacht>()
+            .HasOne(s => s.Category)
+            .WithMany(y => y.Yachts)
+            .HasForeignKey(s => s.CategoryId);
+            
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new YachtBrokerConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
