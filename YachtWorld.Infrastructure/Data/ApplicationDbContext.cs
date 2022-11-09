@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
+using YachtWorld.Infrastructure.Data.Configuration;
 
 namespace YachtWorld.Infrastructure.Data
 {
@@ -12,23 +14,25 @@ namespace YachtWorld.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+                           ;
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new YachtBrokerConfiguration());
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new YachtConfiguration());
+            builder.ApplyConfiguration(new ShipyardConfiguration());
 
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; } = null!;
 
-        public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Destination> Destinations { get; set; } = null!;
 
-        public DbSet<Shipyard> Shipyards { get; set; }
+        public DbSet<Shipyard> Shipyards { get; set; } = null!;
 
-        public DbSet<Yacht> Yachts { get; set; }
+        public DbSet<Yacht> Yachts { get; set; } = null!;
 
-        public DbSet<YachtBroker> YachtBrokers { get; set; }
-
-
-
+        public DbSet<YachtBroker> YachtBrokers { get; set; } = null!;
 
     }
 }

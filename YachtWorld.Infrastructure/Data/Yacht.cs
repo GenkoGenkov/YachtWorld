@@ -29,7 +29,7 @@ namespace YachtWorld.Infrastructure.Data
 
         [Required]
         [Column(TypeName = "money")]
-        [Precision(18, 3)]
+        [Precision(18, 2)]
         public decimal PriceForRent { get; set; }
 
         [Required]

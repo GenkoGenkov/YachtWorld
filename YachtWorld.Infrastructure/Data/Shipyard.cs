@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YachtWorld.Infrastructure.Data
 {
@@ -21,6 +22,12 @@ namespace YachtWorld.Infrastructure.Data
         public string Location { get; set; } = null!;
 
         public int? EstablishedIn { get; set; }
+
+        [Required]
+        public int YachtId { get; set; }
+
+        [ForeignKey(nameof(YachtId))]
+        public Yacht Yacht { get; set; } = null!;
 
         public List<Yacht> Yachts { get; set; }
     }

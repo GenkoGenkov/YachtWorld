@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YachtWorld.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using YachtWorld.Infrastructure.Data;
 namespace YachtWorld.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221109151344_SeedingShipyards")]
+    partial class SeedingShipyards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a812fe9-2a0c-4be6-b5ab-5f95e350c317",
+                            ConcurrencyStamp = "c52c8e5c-2793-43d9-b30c-c57adadf4260",
                             Email = "yachtBroker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "yachtBroker@mail.com",
                             NormalizedUserName = "yachtBroker@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN/6GVRZL25ZAbI3LRAVqzqRpic0zEjZ3hfWNvesz7YLGlrqwDVu/iNgcuIq1SLvzA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENiGL6wrvb9qNkPOH5+WrfYcqgt+QN9M0btGVvRFDWkiZWj3AbRc38PuumoU/TcPfw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8b0be539-fa25-4cbb-a811-7e7e7331884e",
+                            SecurityStamp = "6be36e9b-225c-4aea-9fb9-bef8dbe99985",
                             TwoFactorEnabled = false,
                             UserName = "yachtBroker@mail.com"
                         },
@@ -159,15 +161,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4395570a-3b4f-498f-a852-d03ddf610976",
+                            ConcurrencyStamp = "97d3a98d-4a86-4f31-8c7d-b228077f60e1",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOeW8AHGRkK2RgfJNEf0WUdZtc1Y1ZDCJ+S7ulVq9CggqFheBjZt6eSfhxJXB2DHqw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ+cAuRb2JTBPOVbocxQwzAPoP3BL5izkAlHO471YJOiM7Nvpwe7ApFKyUc+DaaBrA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4f91cc0f-cefc-4e26-9de8-21c4b6ccf9f4",
+                            SecurityStamp = "17e2b893-3078-4a55-b9d4-83b8f4809d72",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
