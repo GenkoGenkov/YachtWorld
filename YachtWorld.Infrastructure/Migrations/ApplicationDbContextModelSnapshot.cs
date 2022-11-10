@@ -143,15 +143,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33bd6e4a-2300-494b-8195-2b7c6c725af7",
+                            ConcurrencyStamp = "9ea0b979-1f0d-4101-aba0-523b24170d8e",
                             Email = "yachtBroker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "YACHTBROKER@MAIL.COM",
                             NormalizedUserName = "YACHTBROKER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMyGjcAjPJVx6dB24hty9/XJ591T5kSWqqUOZ5YGw37h4YcAWHrLHijrC2hmqhX/Ww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENcJJXhW4FrjVE76XX9i0C0Dby/IVhxtZn5ZWWbq+yBxwf4wOxnX4p6CQ4IaiQoNug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "55f93a8a-7cfb-4fd7-b60e-751fe98689fc",
+                            SecurityStamp = "02059a6b-9e9c-44a9-816d-4c44d9ba1f89",
                             TwoFactorEnabled = false,
                             UserName = "yachtBroker@mail.com"
                         },
@@ -159,15 +159,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "059f527e-1e72-48f9-839c-9aab859ff99d",
+                            ConcurrencyStamp = "760ebcb4-a35a-4333-b893-49836af02b2d",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPA4Bg8nxkoErGnWrceO3CSuuON6mXnUn4BMx5bZRbJSJoiRKylXVI3jRcMgrskPgg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKyuXp7fm8sCZOKdyQ+LAOlpSujmhcvovqQscdjW3+hcbaEM6ajeHvLFJ5ld/K10YQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d15f53b7-6ba0-45d6-beed-d02bf0821ff3",
+                            SecurityStamp = "97b05428-186f-4801-989e-81cc3cc36415",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
