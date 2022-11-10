@@ -10,9 +10,9 @@ namespace YachtWorld.Infrastructure.Data
         public int Id { get; set; }
 
         [Required]
-        [StringLength(15)]
-        [Phone]
-        public string PhoneNumber { get; set; } = null!;
+        [StringLength(50)]
+        [EmailAddress]
+        public string Email { get; set; } = null!;
 
         [Required]
         public string UserId { get; set; } = null!;
