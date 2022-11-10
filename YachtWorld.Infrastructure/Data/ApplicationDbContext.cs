@@ -30,6 +30,8 @@ namespace YachtWorld.Infrastructure.Data
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new YachtConfiguration());
             builder.ApplyConfiguration(new ShipyardConfiguration());
+            builder.ApplyConfiguration(new DestinationConfiguration());
+
 
             base.OnModelCreating(builder);
         }

@@ -7,10 +7,6 @@ namespace YachtWorld.Infrastructure.Data
 {
     public class Yacht
     {
-        public Yacht()
-        {
-            Destinations = new List<Destination>();
-        }
 
         [Key]
         public int Id { get; set; }
@@ -74,6 +70,10 @@ namespace YachtWorld.Infrastructure.Data
         [ForeignKey(nameof(ShipyardId))]
         public Shipyard Shipyard { get; set; } = null!;
 
-        public List<Destination> Destinations { get; set; }
+        [Required]
+        public int DestinationId { get; set; }
+
+        [ForeignKey(nameof(DestinationId))]
+        public Destination Destination { get; set; } = null!;
     }
 }

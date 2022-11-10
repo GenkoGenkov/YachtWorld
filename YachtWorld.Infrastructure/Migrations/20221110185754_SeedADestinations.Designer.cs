@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YachtWorld.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using YachtWorld.Infrastructure.Data;
 namespace YachtWorld.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221110185754_SeedADestinations")]
+    partial class SeedADestinations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05ff3575-52f9-4566-a4e6-96746446f8af",
+                            ConcurrencyStamp = "28d964b5-0e22-4567-87d4-fe7b2c27a6fb",
                             Email = "yachtBroker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "YACHTBROKER@MAIL.COM",
                             NormalizedUserName = "YACHTBROKER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEb0O2z8Ivrou1UkfWRW5b0Rr6ApoVF0o3UCk3scXtmCGSH6l630QJxXjMhrFc9swg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFMWSi7kQ0cgbdMBgfyqNCroOqCVU5MekmLXJtuVZmHMxmVjnRWVE9L/srg7+rvDBw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb8868b9-be80-428c-8684-7f061c9e38a9",
+                            SecurityStamp = "f83a6b3c-f01f-4f0e-b318-7178fca5423c",
                             TwoFactorEnabled = false,
                             UserName = "yachtBroker@mail.com"
                         },
@@ -159,15 +161,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e91de83-ad05-4087-b755-8c9ff2268bb1",
+                            ConcurrencyStamp = "33a73996-9b8f-474c-8d30-7140a46f6b31",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKF66heXhKxPlx5dO+Frcg8d0hIbUfiNeMES4qv39rCMuyuE059ogse4FrjFZ5hiVA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHqHnCAYW8EJ49lm6GtorxU6jJW733+VsUXbiRbVnrjgV7vFHk+btNm3Sh7HUmgtmg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "56ed46c2-5a03-4747-8b23-6589567961c2",
+                            SecurityStamp = "a20cd6b3-5c4b-41af-9cb5-cb8c60174312",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -314,7 +316,12 @@ namespace YachtWorld.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("YachtId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("YachtId");
 
                     b.ToTable("Destinations");
 
@@ -323,31 +330,36 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = 1,
                             MainAttraction = "Cannes Film Festival",
-                            Name = "Mediterannean"
+                            Name = "Mediterannean",
+                            YachtId = 1
                         },
                         new
                         {
                             Id = 2,
                             MainAttraction = "Tropical Climate",
-                            Name = "Caribbean"
+                            Name = "Caribbean",
+                            YachtId = 2
                         },
                         new
                         {
                             Id = 3,
                             MainAttraction = "Swim by a Waterfall",
-                            Name = "Australasia"
+                            Name = "Australasia",
+                            YachtId = 3
                         },
                         new
                         {
                             Id = 4,
                             MainAttraction = "Northern Lights",
-                            Name = "Northern Europe"
+                            Name = "Northern Europe",
+                            YachtId = 4
                         },
                         new
                         {
                             Id = 5,
                             MainAttraction = "Flourishing Nature",
-                            Name = "South Pacific"
+                            Name = "South Pacific",
+                            YachtId = 5
                         });
                 });
 
@@ -467,9 +479,6 @@ namespace YachtWorld.Infrastructure.Migrations
                         .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DestinationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Engines")
                         .HasColumnType("nvarchar(max)");
 
@@ -517,8 +526,6 @@ namespace YachtWorld.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("DestinationId");
-
                     b.HasIndex("SailorId");
 
                     b.HasIndex("ShipyardId");
@@ -534,7 +541,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 1,
                             CrewMembers = 33,
                             Description = "Delivered in 2020 and one of the finest jewels delivered by Benetti, 107m / 351' Frodo is a charter yacht of choice in the 100m+/300'+ range. Built and designed by Benetti to discover every corner of the world, her striking lines are matched with an unrivaled level of luxury on all decks. Powered by an unusual Rolls-Royce hybrid-electric propulsion, Frodo ensures wonderful fuel efficiency and a long cruising range, making her eco-friendly with a cruising speed of 16 knots, and 18.5 knots top speed.",
-                            DestinationId = 1,
                             Generators = "3 X Caterpillar",
                             Guests = 12,
                             ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Frodo.png",
@@ -553,7 +559,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 2,
                             CrewMembers = 36,
                             Description = "Aragorn is one of the world's largest and most impressive charter yachts, ideal for entertaining on a grand scale. She boasts many special features including a spa, a gym, a cinema and vast deck spaces. Her interior is opulent and grand and she features not one but two Jacuzzis. Accommodating 36 guests in eighteen staterooms she offers a large group or several small groups the chance for the experience of a lifetime on the West Mediterranean.",
-                            DestinationId = 2,
                             Engines = "2 X Caterpillar",
                             Generators = "3 X Caterpillar",
                             Guests = 36,
@@ -572,7 +577,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 3,
                             CrewMembers = 34,
                             Description = "One of the world’s fastest explorer yachts at 23 knots, Samwise combines adventure yacht capabilities with a superyacht finish. Featuring a helideck suitable for an AW109 or similar, plus a crane with 15M (49’) reach ideal for launching the array of tenders and toys on board, she offers unlimited possibilities.",
-                            DestinationId = 3,
                             Engines = "2 X Caterpillar",
                             Generators = "3 X Caterpillar",
                             Guests = 12,
@@ -591,7 +595,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 2,
                             CrewMembers = 26,
                             Description = "Meriadoc is a multi-award-winning, feature-packed explorer yacht equipped to provide the ultimate charter experience. The 85-metre superyacht for charter offers the best of both worlds, made to entertain and explore the beauty the world has to offer. Delivered by AKYACHT in Summer 2021, she brings together Michael Leach Design and H2 Yacht Design.",
-                            DestinationId = 4,
                             Engines = "2 X Caterpillar",
                             Generators = "4 X Caterpillar",
                             Guests = 12,
@@ -610,7 +613,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 1,
                             CrewMembers = 28,
                             Description = "Peregrin was built for pure fun and adventure. With a 7,640 nautical mile range and equipped with all the latest toys, she offers pure unadulterated adventure, thrills and fun with all the luxuries you would come to expect of a superyacht from world-class cuisine to a dedicated spa centre, all whilst cruising the world’s remotest oceans. Not for charter to US residents while in US waters.",
-                            DestinationId = 5,
                             Engines = "2 X Smit-Man",
                             Generators = "3 X John Deere",
                             Guests = 28,
@@ -629,7 +631,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 4,
                             CrewMembers = 21,
                             Description = "Enhance your Legolas experience: watch here the Chief Stewardess preparing the yacht's cocktail signature HOT WHEELS, and join the Captain here for a complete walkthrough. A certified family-friendly motor yacht for charter, 76m/249’ Legolas is undoubtedly one of the most acclaimed vessels in her range. Seven decks of outstanding features are spread over a volume of nearly 2,000GT . Legolas is operated by an Owner who has been meticulous in her maintenance and upgrades.",
-                            DestinationId = 1,
                             Engines = "2 X MTU",
                             Generators = "3 X Caterpillar",
                             Guests = 12,
@@ -648,7 +649,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 2,
                             CrewMembers = 19,
                             Description = "Having undergone an interior refit in 2018, 73M Lurssen yacht for charter Gimli is everything you would expect from such a renowned shipyard and more. Boasting magnificent spaces both inside and out she offers all the features of luxury life on a superyacht, including huge entertainment spaces, the very latest amenities and incredible accommodation.",
-                            DestinationId = 2,
                             Engines = "2 X Caterpillar",
                             Generators = "2 X Caterpillar",
                             Guests = 12,
@@ -667,7 +667,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 2,
                             CrewMembers = 30,
                             Description = "Smeagol is a recently refit 72M superyacht available for charter in the Mediterranean, the Balearics, Croatia, the Arabian Gulf, Indian Ocean and the Red Sea. She accommodates up to 28 guests in14 staterooms and boasts special features such as a Jacuzzi. Her spacious decks provide the ideal situation for relaxing with friends or family and taking in the scenery of the surrounding area.",
-                            DestinationId = 3,
                             Engines = "2 X MTU",
                             Generators = "3 X MAN",
                             Guests = 30,
@@ -686,7 +685,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 4,
                             CrewMembers = 19,
                             Description = "Boromir offers the ultimate charter experience. She accommodates up to 26 guests in 13 beautiful staterooms, features a spa on board, in addition to a plethora of toys. Her luxurious interior décor and incredible facilities create the ideal charter yacht for large families or corporate events. Not for charter to US residents while in US waters.",
-                            DestinationId = 4,
                             Engines = "1 X Caterpillar",
                             Generators = "2 X John Deere",
                             Guests = 28,
@@ -705,7 +703,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 2,
                             CrewMembers = 13,
                             Description = "Gandalf, the 54.3M Amels superyacht for charter, is a world cruiser designed for free spirits that harmoniously combines zen and adventure. She accommodates 11 guests in five staterooms and is available in the Caribbean and Central America. She boasts a contemporary interior and spacious decks, as well as an impressive range of water toys for guests' recreational enjoyment.",
-                            DestinationId = 5,
                             Engines = "2 X MTU",
                             Generators = "3 X Northern Lights",
                             Guests = 12,
@@ -724,7 +721,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 1,
                             CrewMembers = 14,
                             Description = "With her traditional lines and Feadship pedigree Saruman epitomises classic superyacht charm, yet delve a little deeper  and you find interiors and amenities at the highest levels of modern luxury. Saruman is committed to lowering its impact on the environment by making a conscious effort to reduce  its carbon footprint.",
-                            DestinationId = 1,
                             Engines = "2 X Caterpillar",
                             Generators = "2 X Northern Lights",
                             Guests = 12,
@@ -743,7 +739,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 2,
                             CrewMembers = 10,
                             Description = "Sauron is a beautiful 52m yacht for charter with accommodation for 12 guests in six comfortable staterooms. Spacious and classic in style, Sauron boasts a hot tub, sports bar, vast alfresco dining area and an abundant array of water toys. Her large party deck is ideal for entertaining.",
-                            DestinationId = 2,
                             Engines = "2 X Cummins",
                             Generators = "3 X Northern Lights",
                             Guests = 12,
@@ -762,7 +757,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 2,
                             CrewMembers = 11,
                             Description = "Smaug is a highly pedigreed yacht, blending modern and classic styles.  Accommodations include five spacious staterooms with three staterooms with king beds and two staterooms with queen beds.  Two of the kings convert to twin beds with two Pullman berths in each of these staterooms. Additional amenities include a wide assortment of water toys, exercise equipment, large tender, shade for alfresco dining, multiple areas for sunbathing and a Jacuzzi.",
-                            DestinationId = 3,
                             Engines = "2 X Caterpillar",
                             Generators = "2 X Northern Lights",
                             Guests = 12,
@@ -781,7 +775,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 1,
                             CrewMembers = 18,
                             Description = "Theoden is the ultimate platform for adventures and exploration around the stunning, remote waters of Indonesia and Asia. A traditional Indonesian Phinisi design launched in 2014, she offers stable and comfortable cruising with no compromise to luxury. Sleeping up to 14 guests in seven spacious and well-appointed staterooms, she features spacious outdoor decks for large groups of friends and families to enjoy while taking in the view.",
-                            DestinationId = 4,
                             Engines = "1 X Yanmar",
                             Generators = "2 X Northern Lights",
                             Guests = 50,
@@ -800,7 +793,6 @@ namespace YachtWorld.Infrastructure.Migrations
                             CategoryId = 1,
                             CrewMembers = 14,
                             Description = "Highly custom designed, with an unmissable metallic blue hull and a sleek silhouette inspired by a modern jet fighter, Elrond combines stunning spaces with the latest technology and boasts a top speed of 25 knots. Featuring a striking open-plan contemporary interior and an award winning exterior, she is ideal for entertaining.",
-                            DestinationId = 5,
                             Engines = "2 X MTU",
                             Guests = 12,
                             ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Elrond.png",
@@ -897,17 +889,22 @@ namespace YachtWorld.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("YachtWorld.Infrastructure.Data.Destination", b =>
+                {
+                    b.HasOne("YachtWorld.Infrastructure.Data.Yacht", "Yacht")
+                        .WithMany("Destinations")
+                        .HasForeignKey("YachtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Yacht");
+                });
+
             modelBuilder.Entity("YachtWorld.Infrastructure.Data.Yacht", b =>
                 {
                     b.HasOne("YachtWorld.Infrastructure.Data.Category", "Category")
                         .WithMany("Yachts")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("YachtWorld.Infrastructure.Data.Destination", "Destination")
-                        .WithMany()
-                        .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -928,8 +925,6 @@ namespace YachtWorld.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-
-                    b.Navigation("Destination");
 
                     b.Navigation("Sailor");
 
@@ -957,6 +952,11 @@ namespace YachtWorld.Infrastructure.Migrations
             modelBuilder.Entity("YachtWorld.Infrastructure.Data.Shipyard", b =>
                 {
                     b.Navigation("Yachts");
+                });
+
+            modelBuilder.Entity("YachtWorld.Infrastructure.Data.Yacht", b =>
+                {
+                    b.Navigation("Destinations");
                 });
 #pragma warning restore 612, 618
         }

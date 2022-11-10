@@ -37,6 +37,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                     ShipyardId = 1,
+                    DestinationId = 1
                 },
 
                 new Yacht()
@@ -57,6 +58,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 2,
+                    DestinationId = 2
                 },
 
                 new Yacht()
@@ -77,6 +79,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 7,
+                    DestinationId = 3
                 },
 
                 new Yacht()
@@ -97,6 +100,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 5,
+                    DestinationId = 4
                 },
 
                 new Yacht()
@@ -117,6 +121,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 9,
+                    DestinationId = 5
                 },
 
                 new Yacht()
@@ -137,6 +142,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 4,
+                    DestinationId = 1
                 },
 
                 new Yacht()
@@ -157,6 +163,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 10,
+                    DestinationId = 2
                 },
 
                 new Yacht()
@@ -177,6 +184,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 3,
+                    DestinationId = 3
                 },
 
                 new Yacht()
@@ -197,6 +205,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 6,
+                    DestinationId = 4
                 },
 
                 new Yacht()
@@ -217,6 +226,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 8,
+                    DestinationId = 5
                 },
 
                 new Yacht()
@@ -237,6 +247,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 9,
+                    DestinationId = 1
                 },
 
                 new Yacht()
@@ -257,6 +268,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 7,
+                    DestinationId = 2
                 },
 
                 new Yacht()
@@ -277,6 +289,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 3,
+                    DestinationId = 3
                 },
 
                 new Yacht()
@@ -297,6 +310,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 1,
+                    DestinationId = 4
                 },
 
                 new Yacht()
@@ -317,6 +331,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
                     YachtBrokerId = 1,
                     SailorId = null,
                     ShipyardId = 10,
+                    DestinationId = 5
                 },
             };
 
