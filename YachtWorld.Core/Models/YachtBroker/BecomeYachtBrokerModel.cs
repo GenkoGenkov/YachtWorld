@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace YachtWorld.Core.Models.YachtBroker
 {
     public class BecomeYachtBrokerModel
     {
-
+        [Required]
+        [StringLength(50, MinimumLength = 17)]
+        [EmailAddress]
+        public string Email { get; set; } = null!;
     }
 }

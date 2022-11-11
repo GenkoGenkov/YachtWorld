@@ -10,6 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IYachtService, YachtService>();
+            services.AddScoped<IYachtBrokerService, YachtBrokerService>();
 
             return services;
         }
