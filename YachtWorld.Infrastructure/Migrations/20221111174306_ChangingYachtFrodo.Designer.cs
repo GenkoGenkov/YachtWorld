@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YachtWorld.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using YachtWorld.Infrastructure.Data;
 namespace YachtWorld.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221111174306_ChangingYachtFrodo")]
+    partial class ChangingYachtFrodo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7a7c97a-b0c2-4f90-817c-f8ebd4038e65",
+                            ConcurrencyStamp = "47ef41d7-9336-48ce-b3c6-13ffaca5e449",
                             Email = "yachtBroker@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "YACHTBROKER@MAIL.COM",
                             NormalizedUserName = "YACHTBROKER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIgQ0Bp76EYDEkp3ebkCnyr0BIw09peVKFJj/OJimu6AiU/pwU9OktncVoEkyiUXIg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKjrGPM8OJGzd6Z1f3nRyje3e7eIddzWpZik6nRFmqHcK8FSyUmNvW9voHxnAUeE8w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8c9b4ba5-5d6e-4589-95fd-e71b499071b2",
+                            SecurityStamp = "81ebec4d-da08-45ce-88f3-f5eafb8d85ac",
                             TwoFactorEnabled = false,
                             UserName = "yachtBroker@mail.com"
                         },
@@ -159,15 +161,15 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4f67cc97-3b50-4222-a5ae-301faa5df60d",
+                            ConcurrencyStamp = "033c04f5-9eca-465e-b7a6-0e755a9cdbea",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMZCL3gMbNa/jjTWCTFLQ4lH21eB/6ZXX/VKn4LBSy3roLGysJoOUZ7nf1KTeuOB3g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELgaJYnT1RoIa/bivXsCNZJFOJqGa3fmNEIwTqgxz+AOm7onzM5FS/Q+5+sSXIx5Ug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4c038685-981e-437a-944f-8ee17b50fbbe",
+                            SecurityStamp = "804e6a45-bbab-42e5-ac03-8599b6dd041d",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -557,7 +559,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Caterpillar",
                             Generators = "3 X Caterpillar",
                             Guests = 36,
-                            ImageUrl = "https://media.cntraveler.com/photos/633465b708c8c4ac97ede225/master/pass/four%20seasons%20yacht-sept22-pr4.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Aragorn.png",
                             Length = "91.4 Metres",
                             MaxSpeed = "15 Knots",
                             PriceForRent = 645000.00m,
@@ -576,7 +578,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Caterpillar",
                             Generators = "3 X Caterpillar",
                             Guests = 12,
-                            ImageUrl = "https://moranyachts.imgix.net/wp-content/uploads/Luxury-yacht-Lurssen-Marguertie-for-charter-0402.jpg?auto=format&fit=crop&fm=webp%26nbsp%3B2x&h=320&ixlib=php-3.1.0&w=535&s=98ca6fe304806a46cea19caac252926c",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Samwise.png",
                             Length = "85.1 Metres",
                             MaxSpeed = "17.5 Knots",
                             PriceForRent = 1000000.00m,
@@ -595,7 +597,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Caterpillar",
                             Generators = "4 X Caterpillar",
                             Guests = 12,
-                            ImageUrl = "https://yachtharbour.com/static/uploads/scale_1240_d3197.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Meriadoc.png",
                             Length = "85.1 Metres",
                             MaxSpeed = "16 Knots",
                             PriceForRent = 934700.00m,
@@ -614,7 +616,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Smit-Man",
                             Generators = "3 X John Deere",
                             Guests = 28,
-                            ImageUrl = "https://media.fraseryachts.com/Yachts/Y46_MC_MC/images/website/Benetti_yacht_for_charter_Formosa_22555-nHJHhqpS.jpg?vh=d79e30",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Peregrin.png",
                             Length = "77.4 Metres",
                             MaxSpeed = "12 Knots",
                             PriceForRent = 604700.00m,
@@ -633,7 +635,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X MTU",
                             Generators = "3 X Caterpillar",
                             Guests = 12,
-                            ImageUrl = "https://www.wartsila.com/images/default-source/marine-pictures/yachts/super-intelligent-yachts.jpg?sfvrsn=355a4043_3",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Legolas.png",
                             Length = "75.5 Metres",
                             MaxSpeed = "18 Knots",
                             PriceForRent = 836300.00m,
@@ -652,7 +654,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Caterpillar",
                             Generators = "2 X Caterpillar",
                             Guests = 12,
-                            ImageUrl = "https://yachtharbour.com/static/uploads/scale_1240_0e8d9.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Gimli.png",
                             Length = "73 Metres",
                             MaxSpeed = "16 Knots",
                             PriceForRent = 585400.00m,
@@ -671,7 +673,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X MTU",
                             Generators = "3 X MAN",
                             Guests = 30,
-                            ImageUrl = "http://cdn.cnn.com/cnnnext/dam/assets/211109221217-02-somnio-residential-superyacht.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Smeagol.png",
                             Length = "72 Metres",
                             MaxSpeed = "16.2 Knots",
                             PriceForRent = 559000.00m,
@@ -690,7 +692,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "1 X Caterpillar",
                             Generators = "2 X John Deere",
                             Guests = 28,
-                            ImageUrl = "https://media.fraseryachts.com/Yachts/Y6063_MC_MC/images/website/Benetti_yacht_for_sale_Alfa_20603-wUutHQHe.jpg?vh=51ce02",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Boromir.png",
                             Length = "69.65 Metres",
                             MaxSpeed = "13 Knots",
                             PriceForRent = 492900.00m,
@@ -709,7 +711,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X MTU",
                             Generators = "3 X Northern Lights",
                             Guests = 12,
-                            ImageUrl = "https://nasco-yachts.com/wp-content/uploads/2021/09/Miami-Super-yacht-rental-at-sea.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Gandalf.png",
                             Length = "54.3 Metres",
                             MaxSpeed = "15.5 Knots",
                             PriceForRent = 299900.00m,
@@ -728,7 +730,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Caterpillar",
                             Generators = "2 X Northern Lights",
                             Guests = 12,
-                            ImageUrl = "https://iycstorage.s3.amazonaws.com/import/wordpress/2015/09/Yacht_Impromptu_Superyacht_charter_profile.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Saruman.png",
                             Length = "53.1 Metres",
                             MaxSpeed = "16 Knots",
                             PriceForRent = 203300.00m,
@@ -747,7 +749,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Cummins",
                             Generators = "3 X Northern Lights",
                             Guests = 12,
-                            ImageUrl = "https://cdn.boatinternational.com/files/2020/12/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Sauron.png",
                             Length = "52.4 Metres",
                             MaxSpeed = "15 Knots",
                             PriceForRent = 172100.00m,
@@ -766,7 +768,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "2 X Caterpillar",
                             Generators = "2 X Northern Lights",
                             Guests = 12,
-                            ImageUrl = "https://photo-assets.superyachttimes.com/photo/53338/image/large-c3d76ea97da2917a035084f5523f38b4.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Smaug.png",
                             Length = "51.1 Metres",
                             MaxSpeed = "15 Knots",
                             PriceForRent = 249100.00m,
@@ -785,7 +787,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             Engines = "1 X Yanmar",
                             Generators = "2 X Northern Lights",
                             Guests = 50,
-                            ImageUrl = "https://images.mansionglobal.com/im-361289?width=1280&size=1.77777778",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Theoden.png",
                             Length = "51 Metres",
                             MaxSpeed = "12 Knots",
                             PriceForRent = 120000.00m,
@@ -803,7 +805,7 @@ namespace YachtWorld.Infrastructure.Migrations
                             DestinationId = 5,
                             Engines = "2 X MTU",
                             Guests = 12,
-                            ImageUrl = "https://cdn-bnkbk.nitrocdn.com/nAFpEbfLTzfNdwqrFBzzCzGgTRTvTBTC/assets/static/optimized/rev-88cb8a7/wp-content/uploads/2021/01/Yacht-Holiday-Indonesia-1.jpg",
+                            ImageUrl = "C:\\Users\\Genko\\source\\repos\\YachtWorld\\YachtWorld\\wwwroot\\yachtImages\\Elrond.png",
                             Length = "51 Metres",
                             MaxSpeed = "25 Knots",
                             PriceForRent = 284600.00m,

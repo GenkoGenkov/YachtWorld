@@ -1,14 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using YachtWorld.Core.Contracts;
 using YachtWorld.Models;
 
 namespace YachtWorld.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IYachtService yachtService;
+
+        public HomeController(IYachtService _yachtService)
         {
-            return View();
+            yachtService = _yachtService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var model = await yachtService.FirstFiveYachts();
+
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
