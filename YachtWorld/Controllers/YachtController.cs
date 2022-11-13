@@ -1,12 +1,26 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using YachtWorld.Core.Contracts;
 using YachtWorld.Core.Models.Yacht;
+using YachtWorld.Extensions;
 
 namespace YachtWorld.Controllers
 {
     [Authorize]
     public class YachtController : Controller
     {
+        private readonly IYachtService yachtService;
+
+        private readonly IYachtBrokerService yachtBrokerService;
+
+        public YachtController(
+            IYachtService _yachtService, 
+            IYachtBrokerService _yachtBrokerService)
+        {
+            yachtService = _yachtService;
+            yachtBrokerService = _yachtBrokerService;
+        }
+
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
@@ -31,12 +45,44 @@ namespace YachtWorld.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add() => View();
+        public async Task<IActionResult> Add()
+        {
+            if ((await yachtBrokerService.ExistsById(User.Id())) == false)
+            {
+                return RedirectToAction(nameof(YachtBrokerController.Become), "YachtBroker");
+            }
+
+            var model = new YachtModel()
+            {
+                YachtCategories = await yachtService.AllCategories()
+            };
+
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Add(YachtModel model)
         {
-            int id = 1;
+            if ((await yachtBrokerService.ExistsById(User.Id())) == false)
+            {
+                return RedirectToAction(nameof(YachtBrokerController.Become), "YachtBroker");
+            }
+
+            if ((await yachtService.CategoryExists(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exists");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.YachtCategories = await yachtService.AllCategories();
+
+                return View(model);
+            }
+
+            int yachtBrokerId = await yachtBrokerService.GetYachtBrokerId(User.Id());
+
+            int id = await yachtService.Create(model, yachtBrokerId);
 
             return RedirectToAction(nameof(Details), new { id });
         }

@@ -28,24 +28,19 @@ namespace YachtWorld.Infrastructure.Data
         [Precision(18, 2)]
         public decimal PriceForRent { get; set; }
 
-        [Required]
-        public int Guests { get; set; }
+        public int? Guests { get; set; }
 
-        [Required]
-        public int StateRooms { get; set; }
+        public int? StateRooms { get; set; }
 
-        [Required]
-        public int CrewMembers { get; set; }
+        public int? CrewMembers { get; set; }
 
-        [Required]
-        public string Length { get; set; } = null!;
+        public string? Length { get; set; } = null!;
 
         public string? Engines { get; set; }
 
         public string? Generators { get; set; }
 
-        [Required]
-        public string MaxSpeed { get; set; } = null!;
+        public string? MaxSpeed { get; set; } = null!;
 
         [Required]
         public int CategoryId { get; set; }
@@ -64,14 +59,12 @@ namespace YachtWorld.Infrastructure.Data
         [ForeignKey(nameof(SailorId))]
         public IdentityUser? Sailor { get; set; }
 
-        [Required]
-        public int ShipyardId { get; set; }
+        public int? ShipyardId { get; set; }
 
         [ForeignKey(nameof(ShipyardId))]
         public Shipyard Shipyard { get; set; } = null!;
 
-        [Required]
-        public int DestinationId { get; set; }
+        public int? DestinationId { get; set; }
 
         [ForeignKey(nameof(DestinationId))]
         public Destination Destination { get; set; } = null!;

@@ -32,6 +32,12 @@ namespace YachtWorld.Core.Services
                 .AnyAsync(b => b.UserId == userId);
         }
 
+        public async Task<int> GetYachtBrokerId(string userId)
+        {
+            return (await repo.AllReadonly<YachtBroker>()
+                .FirstOrDefaultAsync(b => b.UserId == userId))?.Id ?? 0;
+        }
+
         public async Task<bool> UserHasRents(string userId)
         {
             return await repo.All<Yacht>()
