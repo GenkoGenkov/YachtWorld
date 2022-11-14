@@ -32,5 +32,11 @@ namespace YachtWorld.Core.Models.Yacht
         public int DestinationId { get; set; }
 
         public IEnumerable<YachtCategoryModel> YachtCategories { get; set; } = new List<YachtCategoryModel>();
+
+        public IEnumerable<YachtShipyardModel> YachtShipyards { get; set; } = new List<YachtShipyardModel>();
+
+        public IEnumerable<YachtDestinationModel> YachtDestinations { get; set; } = new List<YachtDestinationModel>();
+
+
     }
 }

@@ -27,6 +27,30 @@ namespace YachtWorld.Core.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<YachtDestinationModel>> AllDestinations()
+        {
+            return await repo.AllReadonly<Destination>()
+                .OrderBy(d => d.Name)
+                .Select(d => new YachtDestinationModel()
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<YachtShipyardModel>> AllShipyards()
+        {
+            return await repo.AllReadonly<Shipyard>()
+                .OrderBy(s => s.Name)
+                .Select(s => new YachtShipyardModel()
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                })
+                .ToListAsync();
+        }
+
         public async Task<bool> CategoryExists(int categoryId)
         {
             return await repo.AllReadonly<Category>()

@@ -8,6 +8,12 @@ namespace YachtWorld.Core.Contracts
 
         Task<IEnumerable<YachtCategoryModel>> AllCategories();
 
+        Task<IEnumerable<YachtShipyardModel>> AllShipyards();
+
+        Task<IEnumerable<YachtDestinationModel>> AllDestinations();
+
+
+
         Task<bool> CategoryExists(int categoryId);
 
         Task<int> Create(YachtModel model, int yachtBrokerId);

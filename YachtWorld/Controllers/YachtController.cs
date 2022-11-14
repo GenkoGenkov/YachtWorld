@@ -54,7 +54,9 @@ namespace YachtWorld.Controllers
 
             var model = new YachtModel()
             {
-                YachtCategories = await yachtService.AllCategories()
+                YachtCategories = await yachtService.AllCategories(),
+                YachtShipyards = await yachtService.AllShipyards(),
+                YachtDestinations = await yachtService.AllDestinations()
             };
 
             return View(model);
@@ -76,6 +78,9 @@ namespace YachtWorld.Controllers
             if (!ModelState.IsValid)
             {
                 model.YachtCategories = await yachtService.AllCategories();
+                model.YachtShipyards = await yachtService.AllShipyards();
+                model.YachtDestinations = await yachtService.AllDestinations();
+
 
                 return View(model);
             }
