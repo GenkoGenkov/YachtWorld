@@ -11,25 +11,25 @@
             </h6>
             <h6>(@(Model.IsRented ? "Rented" : "Not Rented"))</h6>
             <br />
-            <a asp-controller="Yachts" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-controller="Yacht" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-success">Details</a>
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a asp-controller="Yachts" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-controller="Yacht" asp-action="Edit" asp-route-id="@Model.Id"
                class="btn btn-warning">Edit</a>
-                <a asp-controller="Yachts" asp-action="Delete" asp-route-id="@Model.Id"
+                <a asp-controller="Yacht" asp-action="Delete" asp-route-id="@Model.Id"
                class="btn btn-danger">Delete</a>
                 <p></p>
                 @if (!Model.IsRented)
                 {
-                    <form class="input-group-sm" asp-controller="Yachts"
+                    <form class="input-group-sm" asp-controller="Yacht"
                   asp-action="Rent" asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-primary" type="submit" value="Rent" />
                     </form>
                 }
                 else
                 {
-                    <form asp-controller="Yachts" asp-action="Vacate"
+                    <form asp-controller="Yacht" asp-action="Vacate"
                   asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-primary" type="submit" value="Vacate" />
                     </form>
