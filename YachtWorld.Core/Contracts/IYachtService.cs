@@ -12,11 +12,18 @@ namespace YachtWorld.Core.Contracts
 
         Task<IEnumerable<YachtDestinationModel>> AllDestinations();
 
-
-
         Task<bool> CategoryExists(int categoryId);
 
         Task<int> Create(YachtModel model, int yachtBrokerId);
+
+        Task<YachtsQueryModel> All(
+            string? category = null,
+            string? searchTerm = null,
+            YachtSorting sorting = YachtSorting.Newest,
+            int currentPage = 1,
+            int yachtsPerPage = 1);
+
+        Task<IEnumerable<string>> AllCategoriesNames();
 
     }
 }

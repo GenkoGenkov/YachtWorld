@@ -15,6 +15,54 @@ namespace YachtWorld.Core.Services
             repo = _repo;
         }
 
+        public async Task<YachtsQueryModel> All(string? category = null, string? searchTerm = null, YachtSorting sorting = YachtSorting.Newest, int currentPage = 1, int yachtsPerPage = 1)
+        {
+            var result = new YachtsQueryModel();
+
+            var yachts = repo.AllReadonly<Yacht>();
+
+            if (string.IsNullOrEmpty(category) == false)
+            {
+                yachts = yachts
+                    .Where(y => y.Category.Name == category);
+            }
+
+            if (string.IsNullOrEmpty(searchTerm) == false)
+            {
+                searchTerm = $"%{searchTerm.ToLower()}%";
+
+                yachts = yachts
+                    .Where(y => EF.Functions.Like(y.Title.ToLower(), searchTerm) ||
+                                EF.Functions.Like(y.Description.ToLower(), searchTerm));
+            }
+
+            yachts = sorting switch
+            {
+                YachtSorting.Price => yachts
+                    .OrderBy(y => y.PriceForRent),
+                YachtSorting.NotRentedFirst => yachts
+                    .OrderBy(y => y.SailorId),
+                _ => yachts.OrderByDescending(y => y.Id)
+            };
+
+            result.Yachts = await yachts
+                .Skip((currentPage - 1) * yachtsPerPage)
+                .Take(yachtsPerPage)
+                .Select(y => new YachtServiceModel()
+                {
+                    Id = y.Id,
+                    ImageUrl = y.ImageUrl,
+                    IsRented = y.SailorId != null,
+                    PriceForRent = y.PriceForRent,
+                    Title = y.Title,
+                })
+                .ToListAsync();
+
+            result.TotalYachtsCount = await yachts.CountAsync();
+
+            return result;
+        }
+
         public async Task<IEnumerable<YachtCategoryModel>> AllCategories()
         {
             return await repo.AllReadonly<Category>()
@@ -24,6 +72,14 @@ namespace YachtWorld.Core.Services
                     Id = c.Id,
                     Name = c.Name,
                 })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<string>> AllCategoriesNames()
+        {
+            return await repo.AllReadonly<Category>()
+                .Select(c => c.Name)
+                .Distinct()
                 .ToListAsync();
         }
 

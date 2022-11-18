@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace YachtWorld.Core.Models.Yacht
+﻿namespace YachtWorld.Core.Models.Yacht
 {
     public class YachtsQueryModel
     {
+        public int TotalYachtsCount { get; set; }
+
+        public IEnumerable<YachtServiceModel> Yachts { get; set; } = new List<YachtServiceModel>();
     }
 }

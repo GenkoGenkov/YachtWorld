@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YachtWorld.Core.Contracts;
 using YachtWorld.Core.Models.Yacht;
 using YachtWorld.Extensions;
+using YachtWorld.Models;
 
 namespace YachtWorld.Controllers
 {
@@ -22,11 +23,20 @@ namespace YachtWorld.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllYachtsQueryModel query)
         {
-            var model = new YachtsQueryModel();
+            var result = await yachtService.All(
+                query.Category,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllYachtsQueryModel.YachtsPerPage);
 
-            return View(model);
+            query.TotalYachtsCount = result.TotalYachtsCount;
+            query.Categories = await yachtService.AllCategoriesNames();
+            query.Yachts = result.Yachts;
+
+            return View(query);
         }
 
         public async Task<IActionResult> Mine()
