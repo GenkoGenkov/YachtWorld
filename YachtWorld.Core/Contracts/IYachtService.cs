@@ -32,5 +32,11 @@ namespace YachtWorld.Core.Contracts
         Task<YachtDetailsModel> YachtDetailsById(int id);
 
         Task<bool> Exists(int id);
+
+        Task Edit(int yachtId, YachtModel model);
+
+        Task<bool> HasYachtBrokerWithId(int yachtId, string currentUser);
+
+        Task<int> GetYachtCategoryId(int yachtId);
     }
 }

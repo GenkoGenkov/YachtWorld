@@ -121,15 +121,69 @@ namespace YachtWorld.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new YachtModel();
+            if ((await yachtService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if ((await yachtService.HasYachtBrokerWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var yacht = await yachtService.YachtDetailsById(id);
+            var categoryId = await yachtService.GetYachtCategoryId(id);
+
+            var model = new YachtModel()
+            {
+                Id = id,
+                CategoryId = categoryId,
+                Description = yacht.Description,
+                ImageUrl = yacht.ImageUrl,
+                PriceForRent = yacht.PriceForRent,
+                Title = yacht.Title,
+                YachtCategories = await yachtService.AllCategories()
+            };
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, YachtModel model)
+        public async Task<IActionResult> Edit(YachtModel model)
         {
-            return RedirectToAction(nameof(Details), new { id });
+            if ((await yachtService.Exists(model.Id)) == false)
+            {
+                ModelState.AddModelError("", "Yacht does not exist");
+
+                model.YachtCategories = await yachtService.AllCategories();
+
+                return View(model);
+            }
+
+            if ((await yachtService.HasYachtBrokerWithId(model.Id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if ((await yachtService.CategoryExists(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+
+                model.YachtCategories = await yachtService.AllCategories();
+
+                return View(model);
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                model.YachtCategories = await yachtService.AllCategories();
+
+                return View(model);
+            }
+
+            await yachtService.Edit(model.Id, model);
+
+            return RedirectToAction(nameof(Details), new { model.Id });
         }
 
         [HttpPost]

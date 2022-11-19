@@ -163,6 +163,19 @@ namespace YachtWorld.Core.Services
             return yacht.Id;
         }
 
+        public async Task Edit(int yachtId, YachtModel model)
+        {
+            var yacht = await repo.GetByIdAsync<Yacht>(yachtId);
+
+            yacht.Description = model.Description;
+            yacht.ImageUrl = model.ImageUrl;
+            yacht.PriceForRent = model.PriceForRent;
+            yacht.Title = model.Title;
+            yacht.CategoryId = model.CategoryId;
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<Yacht>()
@@ -181,6 +194,28 @@ namespace YachtWorld.Core.Services
                 })
                 .Take(5)
                 .ToListAsync();
+        }
+
+        public async Task<int> GetYachtCategoryId(int yachtId)
+        {
+            return (await repo.GetByIdAsync<Yacht>(yachtId)).CategoryId;
+        }
+
+        public async Task<bool> HasYachtBrokerWithId(int yachtId, string currentUser)
+        {
+            bool result = false;
+
+            var yacht = await repo.AllReadonly<Yacht>()
+                .Where(y => y.Id == yachtId)
+                .Include(y => y.YachtBroker)
+                .FirstOrDefaultAsync();
+
+            if (yacht?.YachtBroker != null && yacht.YachtBroker.UserId == currentUser)
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         public async Task<YachtDetailsModel> YachtDetailsById(int id)

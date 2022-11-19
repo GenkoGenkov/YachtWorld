@@ -4,6 +4,8 @@ namespace YachtWorld.Core.Models.Yacht
 {
     public class YachtModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string Title { get; set; } = null!;
