@@ -25,5 +25,12 @@ namespace YachtWorld.Core.Contracts
 
         Task<IEnumerable<string>> AllCategoriesNames();
 
+        Task<IEnumerable<YachtServiceModel>> AllYachtsByYachtBrokerId(int id);
+
+        Task<IEnumerable<YachtServiceModel>> AllYachtsByUserId(string userId);
+
+        Task<YachtDetailsModel> YachtDetailsById(int id);
+
+        Task<bool> Exists(int id);
     }
 }

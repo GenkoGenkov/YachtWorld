@@ -41,15 +41,31 @@ namespace YachtWorld.Controllers
 
         public async Task<IActionResult> Mine()
         {
-            var model = new YachtsQueryModel();
+            IEnumerable<YachtServiceModel> myYachts;
+            var userId = User.Id();
 
-            return View(model);
+            if (await yachtBrokerService.ExistsById(userId))
+            {
+                int yachtBrokerId = await yachtBrokerService.GetYachtBrokerId(userId);
+                myYachts = await yachtService.AllYachtsByYachtBrokerId(yachtBrokerId);
+            }
+            else
+            {
+                myYachts = await yachtService.AllYachtsByUserId(userId);
+            }
+
+            return View(myYachts);
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var model = new YachtDetailsModel();
+            if ((await yachtService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await yachtService.YachtDetailsById(id);
 
             return View(model);
         }

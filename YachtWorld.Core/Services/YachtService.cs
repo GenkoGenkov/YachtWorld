@@ -107,6 +107,36 @@ namespace YachtWorld.Core.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<YachtServiceModel>> AllYachtsByUserId(string userId)
+        {
+            return await repo.AllReadonly<Yacht>()
+                .Where(b => b.SailorId == userId)
+                .Select(b => new YachtServiceModel()
+                {
+                    Id = b.Id,
+                    ImageUrl = b.ImageUrl,
+                    IsRented = b.SailorId != null,
+                    PriceForRent = b.PriceForRent,
+                    Title = b.Title,
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<YachtServiceModel>> AllYachtsByYachtBrokerId(int id)
+        {
+            return await repo.AllReadonly<Yacht>()
+                .Where(b => b.YachtBrokerId == id)
+                .Select(b => new YachtServiceModel()
+                {
+                    Id = b.Id,
+                    ImageUrl = b.ImageUrl,
+                    IsRented = b.SailorId != null,
+                    PriceForRent = b.PriceForRent,
+                    Title = b.Title,
+                })
+                .ToListAsync();
+        }
+
         public async Task<bool> CategoryExists(int categoryId)
         {
             return await repo.AllReadonly<Category>()
@@ -133,6 +163,12 @@ namespace YachtWorld.Core.Services
             return yacht.Id;
         }
 
+        public async Task<bool> Exists(int id)
+        {
+            return await repo.AllReadonly<Yacht>()
+                .AnyAsync(y => y.Id == id);
+        }
+
         public async Task<IEnumerable<YachtHomeModel>> FirstFiveYachts()
         {
             return await repo.AllReadonly<Yacht>()
@@ -145,6 +181,37 @@ namespace YachtWorld.Core.Services
                 })
                 .Take(5)
                 .ToListAsync();
+        }
+
+        public async Task<YachtDetailsModel> YachtDetailsById(int id)
+        {
+            return await repo.AllReadonly<Yacht>()
+                .Where(y => y.Id == id)
+                .Select(y => new YachtDetailsModel()
+                {
+                    Category = y.Category.Name,
+                    Shipyard = y.Shipyard.Name,
+                    Destination = y.Destination.Name,
+                    Description = y.Description,
+                    Id = id,
+                    ImageUrl = y.ImageUrl,
+                    IsRented = y.SailorId != null,
+                    PriceForRent = y.PriceForRent,
+                    Title = y.Title,
+                    CrewMembers = y.CrewMembers,
+                    Engines = y.Engines,
+                    Generators = y.Generators,
+                    Guests = y.Guests,
+                    MaxSpeed = y.MaxSpeed,
+                    Length = y.Length,
+                    StateRooms = y.StateRooms,
+                    YachtBroker = new Models.YachtBroker.YachtBrokerServiceModel()
+                    {
+                        Email = y.YachtBroker.Email
+                    }
+
+                })
+                .FirstAsync();
         }
     }
 }

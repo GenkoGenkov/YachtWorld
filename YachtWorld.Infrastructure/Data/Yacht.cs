@@ -34,13 +34,13 @@ namespace YachtWorld.Infrastructure.Data
 
         public int? CrewMembers { get; set; }
 
-        public string? Length { get; set; } = null!;
+        public string? Length { get; set; }
 
         public string? Engines { get; set; }
 
         public string? Generators { get; set; }
 
-        public string? MaxSpeed { get; set; } = null!;
+        public string? MaxSpeed { get; set; }
 
         [Required]
         public int CategoryId { get; set; }

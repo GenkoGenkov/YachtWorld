@@ -6,3 +6,61 @@
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Yacht Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Title</u></p>
+            <p>
+                Price For Rent:
+                <b>@String.Format("{0:f2}", Model.PriceForRent) BGN</b>
+            </p>
+            <p>Description: <b>@Model.Description</b></p>
+            <p>Guests: <b>@Model.Guests</b></p>
+            <p>State rooms: <b>@Model.StateRooms</b></p>
+            <p>Crew members: <b>@Model.CrewMembers</b></p>
+            <p>Length: <b>@Model.Length</b></p>
+            <p>Engines: <b>@Model.Engines</b></p>
+            <p>Generators: <b>@Model.Generators</b></p>
+            <p>Max speed: <b>@Model.MaxSpeed</b></p>
+            <p>Category: <b>@Model.Category</b></p>
+            <p>Shipyard: <b>@Model.Shipyard</b></p>
+            <p>Destination: <b>@Model.Destination</b></p>
+            <p><i>(@(Model.IsRented ? "Rented" : "Not Rented"))</i></p>
+            <div class="form-inline">
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-warning" asp-controller="Yacht" asp-action="Edit"
+                       asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Yacht" asp-action="Delete"
+                       asp-route-id="@Model.Id">Delete</a>
+                    @if (!Model.IsRented)
+                    {
+                        <form class="ml-2" asp-controller="Yacht"
+                              asp-action="Rent" asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Rent" />
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="ml-2" asp-controller="Yacht" asp-action="Vacate"
+                              asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Vacate" />
+                        </form>
+                    }
+                }
+            </div>
+            <p></p>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Yacht broker Info</h5>
+                    <p class="card-text">Email:  @Model.YachtBroker.Email</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
