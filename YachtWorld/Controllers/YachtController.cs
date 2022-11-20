@@ -133,16 +133,23 @@ namespace YachtWorld.Controllers
 
             var yacht = await yachtService.YachtDetailsById(id);
             var categoryId = await yachtService.GetYachtCategoryId(id);
+            var shipyardId = await yachtService.GetYachtShipyardId(id);
+            var destinationId = await yachtService.GetYachtDestinationId(id);
+
 
             var model = new YachtModel()
             {
                 Id = id,
                 CategoryId = categoryId,
+                ShipyardId = shipyardId,
+                DestinationId = destinationId,
                 Description = yacht.Description,
                 ImageUrl = yacht.ImageUrl,
                 PriceForRent = yacht.PriceForRent,
                 Title = yacht.Title,
-                YachtCategories = await yachtService.AllCategories()
+                YachtCategories = await yachtService.AllCategories(),
+                YachtDestinations = await yachtService.AllDestinations(),
+                YachtShipyards = await yachtService.AllShipyards(),
             };
 
             return View(model);
@@ -156,6 +163,8 @@ namespace YachtWorld.Controllers
                 ModelState.AddModelError("", "Yacht does not exist");
 
                 model.YachtCategories = await yachtService.AllCategories();
+                model.YachtDestinations = await yachtService.AllDestinations();
+                model.YachtShipyards = await yachtService.AllShipyards();
 
                 return View(model);
             }
@@ -170,6 +179,8 @@ namespace YachtWorld.Controllers
                 ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
 
                 model.YachtCategories = await yachtService.AllCategories();
+                model.YachtDestinations = await yachtService.AllDestinations();
+                model.YachtShipyards = await yachtService.AllShipyards();
 
                 return View(model);
             }
@@ -177,6 +188,8 @@ namespace YachtWorld.Controllers
             if (ModelState.IsValid == false)
             {
                 model.YachtCategories = await yachtService.AllCategories();
+                model.YachtDestinations = await yachtService.AllDestinations();
+                model.YachtShipyards = await yachtService.AllShipyards();
 
                 return View(model);
             }

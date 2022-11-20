@@ -38,5 +38,10 @@ namespace YachtWorld.Core.Contracts
         Task<bool> HasYachtBrokerWithId(int yachtId, string currentUser);
 
         Task<int> GetYachtCategoryId(int yachtId);
+
+        Task<int> GetYachtShipyardId(int yachtId);
+
+        Task<int> GetYachtDestinationId(int yachtId);
+
     }
 }

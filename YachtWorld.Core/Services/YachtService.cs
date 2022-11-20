@@ -172,6 +172,8 @@ namespace YachtWorld.Core.Services
             yacht.PriceForRent = model.PriceForRent;
             yacht.Title = model.Title;
             yacht.CategoryId = model.CategoryId;
+            yacht.ShipyardId = model.ShipyardId;
+            yacht.DestinationId = model.DestinationId;
 
             await repo.SaveChangesAsync();
         }
@@ -199,6 +201,16 @@ namespace YachtWorld.Core.Services
         public async Task<int> GetYachtCategoryId(int yachtId)
         {
             return (await repo.GetByIdAsync<Yacht>(yachtId)).CategoryId;
+        }
+
+        public async Task<int> GetYachtShipyardId(int yachtId)
+        {
+            return (int)(await repo.GetByIdAsync<Yacht>(yachtId)).ShipyardId;
+        }
+
+        public async Task<int> GetYachtDestinationId(int yachtId)
+        {
+            return (int)(await repo.GetByIdAsync<Yacht>(yachtId)).DestinationId;
         }
 
         public async Task<bool> HasYachtBrokerWithId(int yachtId, string currentUser)
