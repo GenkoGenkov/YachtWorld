@@ -43,5 +43,14 @@ namespace YachtWorld.Core.Contracts
 
         Task<int> GetYachtDestinationId(int yachtId);
 
+        Task Delete(int yachtId);
+
+        Task<bool> IsRented(int yachtId);
+
+        Task<bool> IsRentedByUserWithId(int yachtId, string currentUserId);
+
+        Task Rent(int yachtId, string currentUserId);
+
+        Task Vacate(int yachtId);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using YachtWorld.Core.Contracts;
+using YachtWorld.Core.Exceptions;
 using YachtWorld.Core.Models.Yacht;
 using YachtWorld.Infrastructure.Data;
 using YachtWorld.Infrastructure.Data.Common;
@@ -9,17 +10,22 @@ namespace YachtWorld.Core.Services
     public class YachtService : IYachtService
     {
         private readonly IRepository repo;
+        private readonly IGuard guard;
 
-        public YachtService(IRepository _repo)
+        public YachtService(
+            IRepository _repo,
+            IGuard _guard)
         {
             repo = _repo;
+            guard = _guard;
         }
 
         public async Task<YachtsQueryModel> All(string? category = null, string? searchTerm = null, YachtSorting sorting = YachtSorting.Newest, int currentPage = 1, int yachtsPerPage = 1)
         {
             var result = new YachtsQueryModel();
 
-            var yachts = repo.AllReadonly<Yacht>();
+            var yachts = repo.AllReadonly<Yacht>()
+                .Where(y => y.IsActive);
 
             if (string.IsNullOrEmpty(category) == false)
             {
@@ -111,6 +117,7 @@ namespace YachtWorld.Core.Services
         {
             return await repo.AllReadonly<Yacht>()
                 .Where(b => b.SailorId == userId)
+                .Where(y => y.IsActive)
                 .Select(b => new YachtServiceModel()
                 {
                     Id = b.Id,
@@ -125,6 +132,7 @@ namespace YachtWorld.Core.Services
         public async Task<IEnumerable<YachtServiceModel>> AllYachtsByYachtBrokerId(int id)
         {
             return await repo.AllReadonly<Yacht>()
+                .Where(y => y.IsActive)
                 .Where(b => b.YachtBrokerId == id)
                 .Select(b => new YachtServiceModel()
                 {
@@ -181,12 +189,13 @@ namespace YachtWorld.Core.Services
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<Yacht>()
-                .AnyAsync(y => y.Id == id);
+                .AnyAsync(y => y.Id == id && y.IsActive);
         }
 
         public async Task<IEnumerable<YachtHomeModel>> FirstFiveYachts()
         {
             return await repo.AllReadonly<Yacht>()
+                .Where(y => y.IsActive)
                 .OrderBy(y => y.Id)
                 .Select(y => new YachtHomeModel()
                 {
@@ -218,6 +227,7 @@ namespace YachtWorld.Core.Services
             bool result = false;
 
             var yacht = await repo.AllReadonly<Yacht>()
+                .Where(y => y.IsActive)
                 .Where(y => y.Id == yachtId)
                 .Include(y => y.YachtBroker)
                 .FirstOrDefaultAsync();
@@ -233,6 +243,7 @@ namespace YachtWorld.Core.Services
         public async Task<YachtDetailsModel> YachtDetailsById(int id)
         {
             return await repo.AllReadonly<Yacht>()
+                .Where(y => y.IsActive)
                 .Where(y => y.Id == id)
                 .Select(y => new YachtDetailsModel()
                 {
@@ -259,6 +270,61 @@ namespace YachtWorld.Core.Services
 
                 })
                 .FirstAsync();
+        }
+
+        public async Task Delete(int yachtId)
+        {
+            var yacht = await repo.GetByIdAsync<Yacht>(yachtId);
+            yacht.IsActive = false;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsRented(int yachtId)
+        {
+            return (await repo.GetByIdAsync<Yacht>(yachtId)).SailorId != null;
+        }
+
+        public async Task<bool> IsRentedByUserWithId(int yachtId, string currentUserId)
+        {
+            bool result = false;
+
+            var yacht = await repo.AllReadonly<Yacht>()
+                .Where(y => y.IsActive)
+                .Where(y => y.Id == yachtId)
+                .FirstOrDefaultAsync();
+
+            if (yacht!= null && yacht.SailorId == currentUserId)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        public async Task Rent(int yachtId, string currentUserId)
+        {
+            var yacht = await repo.GetByIdAsync<Yacht>(yachtId);
+
+            if (yacht != null && yacht.SailorId != null)
+            {
+                throw new ArgumentException("Yacht is already rented");
+            }
+
+            guard.AgainstNull(yacht, "Yacht can not be found");
+
+            yacht.SailorId = currentUserId;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task Vacate(int yachtId)
+        {
+            var yacht = await repo.GetByIdAsync<Yacht>(yachtId);
+            guard.AgainstNull(yacht, "Yacht can not be found");
+            yacht.SailorId = null;
+
+            await repo.SaveChangesAsync();
         }
     }
 }

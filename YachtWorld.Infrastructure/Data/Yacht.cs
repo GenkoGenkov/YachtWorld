@@ -68,5 +68,7 @@ namespace YachtWorld.Infrastructure.Data
 
         [ForeignKey(nameof(DestinationId))]
         public Destination Destination { get; set; } = null!;
+
+        public bool IsActive { get; set; } = true;
     }
 }

@@ -156,8 +156,13 @@ namespace YachtWorld.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(YachtModel model)
+        public async Task<IActionResult> Edit(int id, YachtModel model)
         {
+            if (id != model.Id)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
             if ((await yachtService.Exists(model.Id)) == false)
             {
                 ModelState.AddModelError("", "Yacht does not exist");
@@ -199,21 +204,86 @@ namespace YachtWorld.Controllers
             return RedirectToAction(nameof(Details), new { model.Id });
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            if ((await yachtService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if ((await yachtService.HasYachtBrokerWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var yacht = await yachtService.YachtDetailsById(id);
+
+            var model = new YachtDetailsViewModel()
+            {
+                ImageUrl = yacht.ImageUrl,
+                Title = yacht.Title
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, YachtDetailsViewModel model)
+        {
+            if ((await yachtService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if ((await yachtService.HasYachtBrokerWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await yachtService.Delete(id);
+
             return RedirectToAction(nameof(All));
         }
 
         [HttpPost]
         public async Task<IActionResult> Rent(int id)
         {
+            if ((await yachtService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if (await yachtBrokerService.ExistsById(User.Id()))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if (await yachtService.IsRented(id))
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            await yachtService.Rent(id, User.Id());
+
             return RedirectToAction(nameof(Mine));
         }
 
         [HttpPost]
         public async Task<IActionResult> Vacate(int id)
         {
+            if ((await yachtService.Exists(id)) == false || (await yachtService.IsRented(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if ((await yachtService.IsRentedByUserWithId(id, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await yachtService.Vacate(id);
+
             return RedirectToAction(nameof(Mine));
         }
     }

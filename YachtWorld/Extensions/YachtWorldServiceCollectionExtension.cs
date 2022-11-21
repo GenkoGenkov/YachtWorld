@@ -1,4 +1,5 @@
 ﻿using YachtWorld.Core.Contracts;
+using YachtWorld.Core.Exceptions;
 using YachtWorld.Core.Services;
 using YachtWorld.Infrastructure.Data.Common;
 
@@ -11,6 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IYachtService, YachtService>();
             services.AddScoped<IYachtBrokerService, YachtBrokerService>();
+            services.AddScoped<IGuard, Guard>();
 
             return services;
         }
