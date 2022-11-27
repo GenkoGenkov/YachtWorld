@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using YachtWorld.Core.Contracts;
 using YachtWorld.Core.Exceptions;
 using YachtWorld.Core.Models.Yacht;
@@ -11,13 +12,16 @@ namespace YachtWorld.Core.Services
     {
         private readonly IRepository repo;
         private readonly IGuard guard;
+        private readonly ILogger logger;
 
         public YachtService(
             IRepository _repo,
-            IGuard _guard)
+            IGuard _guard,
+            ILogger<YachtService> _logger)
         {
             repo = _repo;
             guard = _guard;
+            logger = _logger;
         }
 
         public async Task<YachtsQueryModel> All(string? category = null, string? searchTerm = null, YachtSorting sorting = YachtSorting.Newest, int currentPage = 1, int yachtsPerPage = 1)
@@ -165,8 +169,16 @@ namespace YachtWorld.Core.Services
                 YachtBrokerId = yachtBrokerId
             };
 
-            await repo.AddAsync(yacht);
-            await repo.SaveChangesAsync();
+            try
+            {
+                await repo.AddAsync(yacht);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(Create), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
 
             return yacht.Id;
         }

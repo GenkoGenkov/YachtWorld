@@ -14,12 +14,16 @@ namespace YachtWorld.Controllers
 
         private readonly IYachtBrokerService yachtBrokerService;
 
+        private readonly ILogger logger;
+
         public YachtController(
             IYachtService _yachtService, 
-            IYachtBrokerService _yachtBrokerService)
+            IYachtBrokerService _yachtBrokerService,
+            ILogger<YachtController> _logger)
         {
             yachtService = _yachtService;
             yachtBrokerService = _yachtBrokerService;
+            logger = _logger;
         }
 
         [AllowAnonymous]
@@ -128,6 +132,8 @@ namespace YachtWorld.Controllers
 
             if ((await yachtService.HasYachtBrokerWithId(id, User.Id())) == false)
             {
+                logger.LogInformation("User with id {0} attempted to access other yacht broker yacht", User.Id());
+
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
