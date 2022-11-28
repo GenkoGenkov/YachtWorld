@@ -16,7 +16,7 @@ namespace YachtWorld.WebApi.Controllers
         }
 
         /// <summary>
-        /// Get statistics about yachts and rented yachts
+        /// Gets statistics about number of yachts and rented yachts
         /// </summary>
         /// <returns>Total yachts and total rents</returns>
         [HttpGet]

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using YachtWorld.Core.Contracts;
 
 namespace YachtWorld.Core.Models.Yacht
 {
-    public class YachtModel
+    public class YachtModel : IYachtModel
     {
         public int Id { get; set; }
 

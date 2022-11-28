@@ -4,6 +4,8 @@ using YachtWorld.Core.Contracts;
 using YachtWorld.Core.Models.Yacht;
 using YachtWorld.Extensions;
 using YachtWorld.Models;
+using YachtWorld.Core.Extensions;
+using Microsoft.VisualBasic;
 
 namespace YachtWorld.Controllers
 {
@@ -62,7 +64,7 @@ namespace YachtWorld.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             if ((await yachtService.Exists(id)) == false)
             {
@@ -70,6 +72,13 @@ namespace YachtWorld.Controllers
             }
 
             var model = await yachtService.YachtDetailsById(id);
+
+            if (information != model.GetInformation())
+            {
+                TempData["ErrorMessage"] = "Don't touch my slug!";
+
+                return RedirectToAction("Index", "Home");
+            }
 
             return View(model);
         }
@@ -119,7 +128,7 @@ namespace YachtWorld.Controllers
 
             int id = await yachtService.Create(model, yachtBrokerId);
 
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new { id = id, information = model.GetInformation() });
         }
 
         [HttpGet]
@@ -207,7 +216,7 @@ namespace YachtWorld.Controllers
 
             await yachtService.Edit(model.Id, model);
 
-            return RedirectToAction(nameof(Details), new { model.Id });
+            return RedirectToAction(nameof(Details), new { id = model.Id, information = model.GetInformation() });
         }
 
         [HttpGet]

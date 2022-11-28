@@ -18,9 +18,9 @@ namespace YachtWorld.Core.Services
         public async Task<StatisticsServiceModel> Total()
         {
             int totalYachts = await repo.AllReadonly<Yacht>()
-                .CountAsync(y => y.IsActive);
+                .CountAsync(h => h.IsActive);
             int rentedYachts = await repo.AllReadonly<Yacht>()
-                .CountAsync(y => y.IsActive && y.SailorId != null);
+                .CountAsync(h => h.IsActive && h.SailorId != null);
 
             return new StatisticsServiceModel()
             {

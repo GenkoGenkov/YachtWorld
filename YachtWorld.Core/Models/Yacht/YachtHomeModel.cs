@@ -1,6 +1,8 @@
-﻿namespace YachtWorld.Core.Models.Yacht
+﻿using YachtWorld.Core.Contracts;
+
+namespace YachtWorld.Core.Models.Yacht
 {
-    public class YachtHomeModel
+    public class YachtHomeModel : IYachtModel
     {
         public int Id { get; set; }
 
