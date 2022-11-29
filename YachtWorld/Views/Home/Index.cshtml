@@ -71,10 +71,10 @@
 @section Scripts {
     <script>
         $('#statistics-button').on('click', ev => {
-            $.get('https://localhost:7194/api/statistics', (data) => {
-                $('#total-yachts').text(data.totalYachts + "Yachts");
-                $('#total-rents').text(data.totalRents + "Rents");
-                $('#statistics').removeClass('d-none';
+            $.get('https://localhost:44364/api/statistics', (data) => {
+                $('#total-yachts').text(data.totalYachts + " " + "Yachts");
+                $('#total-rents').text(data.totalRents + " " + "Rents");
+                $('#statistics').removeClass('d-none');
                 $('#statistics-button').hide();
             });
         });
