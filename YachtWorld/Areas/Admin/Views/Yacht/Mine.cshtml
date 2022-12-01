@@ -1,0 +1,37 @@
+﻿@model MyYachtsViewModel
+
+@{
+    ViewBag.Title = "My Yachts";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<h4>My Added Yachts</h4>
+
+@if (!Model.AddedYachts.Any())
+{
+    <h2 class="text-center">You have no added yachts yet!</h2>
+}
+
+<div class="row">
+    @foreach (var yacht in Model.AddedYachts)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_YachtPartial.cshtml", yacht)
+    }
+</div>
+
+<h4>My Rented Yachts</h4>
+
+@if (!Model.RentedYachts.Any())
+{
+    <h2 class="text-center">You have no rented yachts yet!</h2>
+}
+
+<div class="row">
+    @foreach (var yacht in Model.RentedYachts)
+    {
+        @await Html.PartialAsync("~/Views/Shared/_YachtPartial.cshtml", yacht)
+    }
+</div>
+

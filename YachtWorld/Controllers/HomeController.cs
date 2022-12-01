@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using YachtWorld.Core.Contracts;
 using YachtWorld.Models;
+using static YachtWorld.Areas.Admin.Constants.AdminConstants;
 
 namespace YachtWorld.Controllers
 {
@@ -16,6 +17,11 @@ namespace YachtWorld.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
+
             var model = await yachtService.FirstFiveYachts();
 
             return View(model);

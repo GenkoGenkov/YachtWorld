@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YachtWorld.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using YachtWorld.Infrastructure.Data;
 namespace YachtWorld.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221201201214_UserExtended")]
+    partial class UserExtended
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace YachtWorld.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -181,11 +183,6 @@ namespace YachtWorld.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -239,14 +236,13 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0be6b620-0a88-4226-b52e-79d95a26d213",
+                            ConcurrencyStamp = "28d3b169-bce9-409e-b940-492e6108558a",
                             Email = "yachtBroker@mail.com",
                             EmailConfirmed = false,
-                            IsActive = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "YACHTBROKER@MAIL.COM",
                             NormalizedUserName = "YACHTBROKER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELfN+0IdRwWdxzlvwq9GZoWiK+FFzu1MoY8EEcIqltgN3mFVpSMWYCLir0tCe/TyGw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHlXbatRtox8Fvze5QqoPs+f9tir52gf74Dq3fr39a1ONJjX/O+l59/EJo5l87EfAQ==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "yachtBroker@mail.com"
@@ -255,14 +251,13 @@ namespace YachtWorld.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "958cf25a-0316-46a7-b649-15fdb919b21e",
+                            ConcurrencyStamp = "f7bb8971-1068-40b2-a01f-a943a5acc09a",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
-                            IsActive = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@MAIL.COM",
                             NormalizedUserName = "GUEST@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEISMUtJi5JpWX6FO9sAg3xPeGsmfUB9s9qzVJrcL7SxydBvy2g0iExui973irMUgBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKyQDV4xcMQ0b484sF8OQZiXgXwmNoL8lxmlt7GOH4YPxf7RSk2QBg6BNoicwTBv5A==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
@@ -877,7 +872,7 @@ namespace YachtWorld.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -904,7 +899,7 @@ namespace YachtWorld.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

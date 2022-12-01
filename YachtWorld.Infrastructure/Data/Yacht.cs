@@ -57,7 +57,7 @@ namespace YachtWorld.Infrastructure.Data
         public string? SailorId { get; set; }
 
         [ForeignKey(nameof(SailorId))]
-        public IdentityUser? Sailor { get; set; }
+        public ApplicationUser? Sailor { get; set; }
 
         public int? ShipyardId { get; set; }
 

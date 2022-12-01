@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YachtWorld.Core.Contracts;
+using YachtWorld.Core.Extensions;
 using YachtWorld.Core.Models.Yacht;
 using YachtWorld.Extensions;
 using YachtWorld.Models;
-using YachtWorld.Core.Extensions;
-using Microsoft.VisualBasic;
+using static YachtWorld.Areas.Admin.Constants.AdminConstants;
 
 namespace YachtWorld.Controllers
 {
@@ -47,6 +47,11 @@ namespace YachtWorld.Controllers
 
         public async Task<IActionResult> Mine()
         {
+            if (User.IsInRole(AdminRolleName))
+            {
+                return RedirectToAction("Mine", "Yacht", new { area = AreaName });
+            }
+
             IEnumerable<YachtServiceModel> myYachts;
             var userId = User.Id();
 
@@ -269,7 +274,7 @@ namespace YachtWorld.Controllers
                 return RedirectToAction(nameof(All));
             }
 
-            if (await yachtBrokerService.ExistsById(User.Id()))
+            if (!User.IsInRole(AdminRolleName) && await yachtBrokerService.ExistsById(User.Id()))
             {
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
