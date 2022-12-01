@@ -22,12 +22,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
         options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
     });
+
 builder.Services.AddApplicationServices();
 builder.Services.AddResponseCaching();
 
