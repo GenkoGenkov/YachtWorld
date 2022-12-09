@@ -35,6 +35,10 @@ namespace YachtWorld.Infrastructure.Data
 
 
             base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>()
+            .Property(e => e.Id)
+            .ValueGeneratedOnAdd();
         }
 
         public DbSet<Category> Categories { get; set; } = null!;
