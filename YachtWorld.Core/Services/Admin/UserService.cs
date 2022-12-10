@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using YachtWorld.Core.Contracts.Admin;
 using YachtWorld.Core.Models.Admin;
@@ -11,9 +12,14 @@ namespace YachtWorld.Core.Services.Admin
     {
         private readonly IRepository repo;
 
-        public UserService(IRepository _repo)
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public UserService(
+            IRepository _repo,
+            UserManager<ApplicationUser> _userManager)
         {
             repo = _repo;
+            userManager = _userManager;
         }
 
         public async Task<IEnumerable<UserServiceModel>> All()
@@ -21,6 +27,7 @@ namespace YachtWorld.Core.Services.Admin
             List<UserServiceModel> result;
 
             result = await repo.AllReadonly<YachtBroker>()
+                .Where(b => b.User.IsActive)
                 .Select(b => new UserServiceModel()
                 { 
                     UserId = b.UserId,
@@ -34,6 +41,7 @@ namespace YachtWorld.Core.Services.Admin
 
             result.AddRange(await repo.AllReadonly<ApplicationUser>()
                 .Where(u => yachtBrokerIds.Contains(u.Id) == false)
+                .Where(u => u.IsActive)
                 .Select(u => new UserServiceModel()
                 {
                     UserId = u.Id,
@@ -42,6 +50,25 @@ namespace YachtWorld.Core.Services.Admin
                 }).ToListAsync());
 
             return result;
+        }
+
+        public async Task<bool> Forget(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+            user.PhoneNumber = null;
+            user.FirstName = null;
+            user.Email = null;
+            user.IsActive = false;
+            user.LastName = null;
+            user.NormalizedEmail = null;
+            user.NormalizedUserName = null;
+            user.PasswordHash = null;
+            user.UserName = $"forgottenUser-{DateTime.Now.Ticks}";
+
+            var result = await userManager.UpdateAsync(user);
+
+            return result.Succeeded;
         }
 
         public async Task<string> UserFullName(string userId)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using YachtWorld.Core.Constants;
 using YachtWorld.Core.Contracts.Admin;
 
 namespace YachtWorld.Areas.Admin.Controllers
@@ -17,6 +18,23 @@ namespace YachtWorld.Areas.Admin.Controllers
             var model = await userService.All();
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Forget(string userId)
+        {
+            bool result = await userService.Forget(userId);
+
+            if (result)
+            {
+                TempData[MessageConstant.SuccessMessage] = "User is now forgotten";
+            }
+            else
+            {
+                TempData[MessageConstant.ErrorMessage] = "User can not be forgotten";
+            }
+
+            return RedirectToAction(nameof(All));
         }
     }
 }

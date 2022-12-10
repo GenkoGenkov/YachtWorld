@@ -1,4 +1,6 @@
-﻿using YachtWorld.Core.Models.Admin;
+﻿using Microsoft.AspNetCore.Identity;
+using YachtWorld.Core.Models.Admin;
+using YachtWorld.Infrastructure.Data;
 
 namespace YachtWorld.Core.Contracts.Admin
 {
@@ -7,5 +9,7 @@ namespace YachtWorld.Core.Contracts.Admin
         Task<string> UserFullName(string userId);
 
         Task<IEnumerable<UserServiceModel>> All();
+
+        Task<bool> Forget(string userId);
     }
 }
