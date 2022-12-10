@@ -7,7 +7,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Yacht> builder)
         {
-            builder.HasData(CreateYachts());
+            //builder.HasData(CreateYachts());
         }
 
         private List<Yacht> CreateYachts()

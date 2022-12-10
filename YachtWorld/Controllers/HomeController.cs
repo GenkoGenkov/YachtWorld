@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using YachtWorld.Core.Contracts;
 using YachtWorld.Models;
@@ -10,9 +11,14 @@ namespace YachtWorld.Controllers
     {
         private readonly IYachtService yachtService;
 
-        public HomeController(IYachtService _yachtService)
+        private readonly ILogger logger;
+
+        public HomeController(
+            IYachtService _yachtService, 
+            ILogger<HomeController> _logger)
         {
             yachtService = _yachtService;
+            logger = _logger;
         }
 
         public async Task<IActionResult> Index()
@@ -30,6 +36,10 @@ namespace YachtWorld.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            var feature = this.HttpContext.Features.Get<IExceptionHandlerFeature>();
+
+            logger.LogError(feature.Error, "TraceIdentifier: {0}", Activity.Current?.Id ?? HttpContext.TraceIdentifier);
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
