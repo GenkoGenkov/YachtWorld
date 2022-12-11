@@ -81,7 +81,7 @@ namespace YachtWorld.Controllers
 
             if (information != model.GetInformation())
             {
-                TempData["ErrorMessage"] = "Don't touch my slug!";
+                TempData["ErrorMessage"] = "Don't touch my URL!";
 
                 return RedirectToAction("Index", "Home");
             }
