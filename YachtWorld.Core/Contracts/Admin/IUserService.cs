@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using YachtWorld.Core.Models.Admin;
-using YachtWorld.Infrastructure.Data;
+﻿using YachtWorld.Core.Models.Admin;
 
 namespace YachtWorld.Core.Contracts.Admin
 {
