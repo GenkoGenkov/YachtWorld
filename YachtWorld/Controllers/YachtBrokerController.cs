@@ -49,12 +49,12 @@ namespace YachtWorld.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            //if (await yachtBrokerService.UserWithEmailExists(model.PhoneNumber))
-            //{
-            //    TempData[MessageConstant.ErrorMessage] = "The email alredy exists";
+            if (await yachtBrokerService.UserWithEmailExists(model.PhoneNumber))
+            {
+                TempData[MessageConstant.ErrorMessage] = "The email alredy exists";
 
-            //    return RedirectToAction("Index", "Home");
-            //}
+                return RedirectToAction("Index", "Home");
+            }
 
             if (await yachtBrokerService.UserHasRents(userId))
             {
@@ -64,6 +64,8 @@ namespace YachtWorld.Controllers
             }
 
             await yachtBrokerService.Create(userId, model.PhoneNumber);
+
+            TempData[MessageConstant.SuccessMessage] = "You are now a yacht broker";
 
             return RedirectToAction("All", "Yacht");
         }
