@@ -46,7 +46,7 @@ namespace YachtWorld.Tests
 
             await repo.AddAsync(new Yacht()
             {
-                Id = 1,
+                Id = 19,
                 Description = "",
                 DestinationId = 4,
                 ImageUrl = "",
@@ -56,9 +56,9 @@ namespace YachtWorld.Tests
 
             await repo.SaveChangesAsync();
 
-            await yachtService.Delete(1);
+            await yachtService.Delete(19);
 
-            var dbYacht = await repo.GetByIdAsync<Yacht>(1);
+            var dbYacht = await repo.GetByIdAsync<Yacht>(19);
 
             Assert.That(dbYacht.IsActive, Is.EqualTo(false));
         }
@@ -75,7 +75,7 @@ namespace YachtWorld.Tests
 
             await repo.AddAsync(new Yacht()
             {
-                Id = 1,
+                Id = 19,
                 Description = "",
                 DestinationId = 4,
                 ImageUrl = "",
@@ -85,9 +85,9 @@ namespace YachtWorld.Tests
 
             await repo.SaveChangesAsync();
 
-            await yachtService.Edit(1, new YachtModel()
+            await yachtService.Edit(19, new YachtModel()
             {
-                Id = 1,
+                Id = 19,
                 Description = "This yacht is edited",
                 DestinationId = 4,
                 ImageUrl = "",
@@ -95,7 +95,7 @@ namespace YachtWorld.Tests
                 Title = ""
             });
 
-            var dbYacht = await repo.GetByIdAsync<Yacht>(1);
+            var dbYacht = await repo.GetByIdAsync<Yacht>(19);
 
             Assert.That(dbYacht.Description, Is.EqualTo("This yacht is edited"));
         }
@@ -112,12 +112,12 @@ namespace YachtWorld.Tests
 
             await repo.AddRangeAsync(new List<Yacht>()
             {
-                new Yacht() { Id = 1, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
-                new Yacht() { Id = 6, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
-                new Yacht() { Id = 2, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
-                new Yacht() { Id = 5, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = ""},
-                new Yacht() { Id = 3, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
-                new Yacht() { Id = 4, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
+                new Yacht() { Id = 19, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
+                new Yacht() { Id = 21, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
+                new Yacht() { Id = 20, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
+                new Yacht() { Id = 24, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = ""},
+                new Yacht() { Id = 22, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
+                new Yacht() { Id = 23, Description = "", DestinationId = 2, ImageUrl = "", ShipyardId = 3, Title = "" },
             });
 
             await repo.SaveChangesAsync();
@@ -125,35 +125,8 @@ namespace YachtWorld.Tests
             var yachtCollection = await yachtService.FirstFiveYachts();
 
             Assert.That(5, Is.EqualTo(yachtCollection.Count()));
-            Assert.That(yachtCollection.Any(y => y.Id == 6), Is.False);
+            Assert.That(yachtCollection.Any(y => y.Id == 24), Is.False);
         }
-
-        //[Test]
-        //public async Task TestFirstFiveYachtsNumberAndOrder()
-        //{
-        //    var loggerMock = new Mock<ILogger<YachtService>>();
-        //    logger = loggerMock.Object;
-
-        //    var repoMock = new Mock<IRepository>();
-        //    IQueryable<Yacht> yachts = new List<Yacht>()
-        //    {
-        //        new Yacht() { Id = 1 },
-        //        new Yacht() { Id = 6 },
-        //        new Yacht() { Id = 2 },
-        //        new Yacht() { Id = 5 },
-        //        new Yacht() { Id = 3 },
-        //        new Yacht() { Id = 4 },
-        //    }.AsQueryable();
-        //    repoMock.Setup(r => r.AllReadonly<Yacht>()).Returns(yachts);
-        //    repo = repoMock.Object;
-
-        //    yachtService = new YachtService(repo, guard, logger);
-
-        //    var yachtCollection = await yachtService.FirstFiveYachts();
-
-        //    Assert.That(5, Is.EqualTo(yachtCollection.Count()));
-        //    Assert.That(yachtCollection.Any(y => y.Id == 6), Is.False);
-        //}
 
         [TearDown] 
         public void TearDown() 
