@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using YachtWorld.Core.Constants;
 using YachtWorld.Core.Contracts;
 using YachtWorld.Core.Extensions;
 using YachtWorld.Core.Models.Yacht;
@@ -133,6 +134,8 @@ namespace YachtWorld.Controllers
 
             int id = await yachtService.Create(model, yachtBrokerId);
 
+            TempData[MessageConstant.SuccessMessage] = "You have successfully added a yacht!";
+
             return RedirectToAction(nameof(Details), new { id = id, information = model.GetInformation() });
         }
 
@@ -221,6 +224,8 @@ namespace YachtWorld.Controllers
 
             await yachtService.Edit(model.Id, model);
 
+            TempData[MessageConstant.SuccessMessage] = "You have successfully edited a yacht!";
+
             return RedirectToAction(nameof(Details), new { id = model.Id, information = model.GetInformation() });
         }
 
@@ -263,6 +268,8 @@ namespace YachtWorld.Controllers
 
             await yachtService.Delete(id);
 
+            TempData[MessageConstant.SuccessMessage] = "You have successfully deleted a yacht!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -286,6 +293,8 @@ namespace YachtWorld.Controllers
 
             await yachtService.Rent(id, User.Id());
 
+            TempData[MessageConstant.SuccessMessage] = "You have successfully rented a yacht!";
+
             return RedirectToAction(nameof(Mine));
         }
 
@@ -303,6 +312,8 @@ namespace YachtWorld.Controllers
             }
 
             await yachtService.Vacate(id);
+
+            TempData[MessageConstant.SuccessMessage] = "You have successfully vacated a yacht!";
 
             return RedirectToAction(nameof(Mine));
         }
