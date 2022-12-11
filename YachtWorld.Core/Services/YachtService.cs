@@ -277,7 +277,7 @@ namespace YachtWorld.Core.Services
                     StateRooms = y.StateRooms,
                     YachtBroker = new Models.YachtBroker.YachtBrokerServiceModel()
                     {
-                        Email = y.YachtBroker.Email
+                        PhoneNumber = y.YachtBroker.PhoneNumber
                     }
 
                 })

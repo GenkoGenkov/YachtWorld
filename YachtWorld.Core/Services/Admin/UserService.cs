@@ -33,7 +33,7 @@ namespace YachtWorld.Core.Services.Admin
                     UserId = b.UserId,
                     Email = b.User.Email,
                     FullName = $"{ b.User.FirstName } { b.User.LastName }",
-                    PhoneNumber = b.User.PhoneNumber,
+                    PhoneNumber = b.PhoneNumber,
                 })
                 .ToListAsync();
 

@@ -10,7 +10,7 @@ namespace YachtWorld.Infrastructure.Data.Configuration
             builder.HasData(new YachtBroker()
             {
                 Id = 1,
-                Email = "yachtBroker@mail.com",
+                PhoneNumber = "+359888888888",
                 UserId = "dea12856-c198-4129-b3f3-b893d8395082"
             });
         }

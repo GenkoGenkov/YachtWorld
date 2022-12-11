@@ -14,12 +14,12 @@ namespace YachtWorld.Core.Services
             repo = _repo;
         }
 
-        public async Task Create(string userId, string email)
+        public async Task Create(string userId, string phoneNumber)
         {
             var yachtBroker = new YachtBroker()
             {
                 UserId = userId,
-                Email = email
+                PhoneNumber = phoneNumber,
             };
 
             await repo.AddAsync(yachtBroker);
@@ -44,10 +44,10 @@ namespace YachtWorld.Core.Services
                 .AnyAsync(y => y.SailorId == userId);
         }
 
-        public async Task<bool> UserWithEmailExists(string email)
+        public async Task<bool> UserWithEmailExists(string phoneNumber)
         {
             return await repo.All<YachtBroker>()
-                .AnyAsync(b => b.Email == email);
+                .AnyAsync(b => b.PhoneNumber == phoneNumber);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace YachtWorld.Core.Contracts
 
         Task<bool> UserHasRents(string userId);
 
-        Task Create(string userId, string email);
+        Task Create(string userId, string phoneNumber);
 
         Task<int> GetYachtBrokerId(string userId);
     }
