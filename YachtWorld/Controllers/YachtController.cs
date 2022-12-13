@@ -224,7 +224,7 @@ namespace YachtWorld.Controllers
 
             await yachtService.Edit(model.Id, model);
 
-            TempData[MessageConstant.SuccessMessage] = "You have successfully edited a yacht!";
+            TempData[MessageConstant.WarningMessage] = "You have successfully edited a yacht!";
 
             return RedirectToAction(nameof(Details), new { id = model.Id, information = model.GetInformation() });
         }
@@ -268,7 +268,7 @@ namespace YachtWorld.Controllers
 
             await yachtService.Delete(id);
 
-            TempData[MessageConstant.SuccessMessage] = "You have successfully deleted a yacht!";
+            TempData[MessageConstant.WarningMessage] = "You have successfully deleted a yacht!";
 
             return RedirectToAction(nameof(All));
         }

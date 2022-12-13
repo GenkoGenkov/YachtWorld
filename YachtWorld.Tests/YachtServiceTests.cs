@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
+using NUnit.Framework;
 using System.Linq;
 using YachtWorld.Core.Contracts;
 using YachtWorld.Core.Exceptions;
@@ -36,6 +37,26 @@ namespace YachtWorld.Tests
         }
 
         //[Test]
+        //public async Task TestHasYachtBrokerWithIdShouldReturnTrueWithValiId()
+        //{
+        //    var loggerMock = new Mock<ILogger<YachtService>>();
+        //    logger = loggerMock.Object;
+
+        //    var repo = new Repository(applicationDbContext);
+
+        //    yachtService = new YachtService(repo, guard, logger);
+
+        //    var yachtId = repo.All<Yacht>().Select(y => y.SailorId != null).FirstOrDefaultAsync().Id.ToString();
+        //    var userId = repo.All<Yacht>().Select(y => y.SailorId != null).Select(b => b.YachtBroker.User.Id).ToString();
+        //    int intYachtId = yachtId == null ? 0 : 1;
+        //    var result = await yachtService.HasYachtBrokerWithId(intYachtId, userId);
+
+        //    Assert.IsTrue(result);
+        //}
+
+
+
+        //[Test]
         //public async Task TestCreateShouldCreateYacht()
         //{
         //    var loggerMock = new Mock<ILogger<YachtService>>();
@@ -47,25 +68,165 @@ namespace YachtWorld.Tests
 
         //    var initialYachts = repo.All<Yacht>().Count();
 
-        //    YachtModel newYacht = new Yacht() 
+        //    var yacht = new Yacht()
         //    {
-        //        Id = 1,
-        //        CategoryId = 2,
-        //        ShipyardId = 1,
-        //        DestinationId = 1,
+        //        Id = 19,
         //        Description = "",
+        //        DestinationId = 4,
         //        ImageUrl = "",
-        //        PriceForRent = 180_000,
+        //        ShipyardId = 1,
         //        Title = ""
-
         //    };
 
-        //    var newYachtId = await yachtService.Create(newYacht, 1);
+        //    var newYachtId = await yachtService.Create(yacht, 1);
 
         //    var yachtCountAfterNewOne = repo.All<Yacht>().Count();
 
         //    Assert.That(yachtCountAfterNewOne, Is.EqualTo(initialYachts + 1));
         //}
+
+        //[Test]
+        //public async Task TestIsRentedByUserWithIdShouldReturnCorrectTrueWithValidId()
+        //{
+        //    var loggerMock = new Mock<ILogger<YachtService>>();
+        //    logger = loggerMock.Object;
+
+        //    var repo = new Repository(applicationDbContext);
+
+        //    yachtService = new YachtService(repo, guard, logger);
+
+        //    var yachtId = repo.All<Yacht>().Select(y => y.SailorId != null).FirstOrDefaultAsync().Id;
+        //    var sailorId = repo.All<Yacht>().Select(y => y.SailorId != null);
+        //}
+
+        [Test]
+        public async Task TestRentShouldRentYachtSuccessfully()
+        {
+            var loggerMock = new Mock<ILogger<YachtService>>();
+            logger = loggerMock.Object;
+
+            var repo = new Repository(applicationDbContext);
+
+            yachtService = new YachtService(repo, guard, logger);
+
+            var yacht = new Yacht()
+            {
+                Id = 19,
+                Description = "",
+                DestinationId = 4,
+                ImageUrl = "",
+                ShipyardId = 1,
+                Title = ""
+            };
+
+            await repo.AddAsync(yacht);
+            await repo.SaveChangesAsync();
+
+            var sailorId = yacht.SailorId;
+
+            await yachtService.Rent(yacht.Id, sailorId);
+
+            var yachtsInDb = applicationDbContext.Yachts.Find(yacht.Id);
+
+            Assert.IsNotNull(yachtsInDb);
+            Assert.That(sailorId, Is.EqualTo(yacht.SailorId));
+        }
+
+        [Test]
+        public async Task TestVacateShouldReturnYachtSuccessfully()
+        {
+            var loggerMock = new Mock<ILogger<YachtService>>();
+            logger = loggerMock.Object;
+
+            var repo = new Repository(applicationDbContext);
+
+            yachtService = new YachtService(repo, guard, logger);
+
+            var yacht = new Yacht()
+            {
+                Id = 19,
+                Description = "",
+                DestinationId = 4,
+                ImageUrl = "",
+                ShipyardId = 1,
+                Title = ""
+            };
+
+            await repo.AddAsync(yacht);
+            await repo.SaveChangesAsync();
+
+            await yachtService.Vacate(yacht.Id);
+
+            var yachtsInDb = applicationDbContext.Yachts.Find(yacht.Id);
+
+            Assert.IsNull(yacht.SailorId);
+            Assert.IsNotNull(yachtsInDb);
+            Assert.IsNull(yachtsInDb.SailorId);
+        }
+
+        [Test]
+        public async Task TestExistsShouldReturnCorrectTrueWithValidId()
+        {
+            var loggerMock = new Mock<ILogger<YachtService>>();
+            logger = loggerMock.Object;
+
+            var repo = new Repository(applicationDbContext);
+
+            yachtService = new YachtService(repo, guard, logger);
+
+            var yachtId = repo.All<Yacht>().Select(y => y.SailorId != null).FirstOrDefaultAsync().Id;
+            var result = await yachtService.Exists(yachtId);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task TestIsRentedShouldReturnCorrectTrueWithValidId()
+        {
+            var loggerMock = new Mock<ILogger<YachtService>>();
+            logger = loggerMock.Object;
+
+            var repo = new Repository(applicationDbContext);
+
+            yachtService = new YachtService(repo, guard, logger);
+
+            var yachtId = repo.All<Yacht>().Select(y => y.SailorId != null).FirstOrDefaultAsync().Id;
+            var result = await yachtService.IsRented(yachtId);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task TestGetYachtCategoryIdShouldReturnCorrectId()
+        {
+            var loggerMock = new Mock<ILogger<YachtService>>();
+            logger = loggerMock.Object;
+
+            var repo = new Repository(applicationDbContext);
+
+            yachtService = new YachtService(repo, guard, logger);
+
+            var yachtId = repo.All<Yacht>().Select(y => y.SailorId != null).FirstOrDefaultAsync().Id;
+            var result = await yachtService.GetYachtCategoryId(yachtId);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public async Task TestCategoryExistsShouldReturnTrueWithValiId()
+        {
+            var loggerMock = new Mock<ILogger<YachtService>>();
+            logger = loggerMock.Object;
+
+            var repo = new Repository(applicationDbContext);
+
+            yachtService = new YachtService(repo, guard, logger);
+
+            var categoryId = repo.All<Category>().FirstOrDefault().Id;
+            var result = await yachtService.CategoryExists(categoryId);
+
+            Assert.IsTrue(result);
+        }
 
         [Test]
         public async Task TestYachtDetailsByIdShouldReturnCorrectYachtData()
