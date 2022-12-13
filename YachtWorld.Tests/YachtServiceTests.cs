@@ -267,7 +267,7 @@ namespace YachtWorld.Tests
         }
 
         [Test]
-        public async Task TestAllYachtsByYachtBrokerIdShouldReturnCorrectYacht()
+        public async Task TestAllYachtsByYachtBrokerIdShouldReturnCorrectYachts()
         {
             var loggerMock = new Mock<ILogger<YachtService>>();
             logger = loggerMock.Object;
