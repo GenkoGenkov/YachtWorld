@@ -1,15 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YachtWorld.Core.Contracts;
-using YachtWorld.Infrastructure.Data.Common;
-using YachtWorld.Infrastructure.Data;
 using YachtWorld.Core.Contracts.Admin;
-using YachtWorld.Core.Services;
 using YachtWorld.Core.Services.Admin;
+using YachtWorld.Infrastructure.Data;
 
 namespace YachtWorld.Tests
 {
@@ -39,7 +31,6 @@ namespace YachtWorld.Tests
 
             var result = this.rentService.All();
             var rentedYachtsInDb = applicationDbContext.Yachts.Where(y => y.SailorId != null);
-            //var resultYacht= result.ToList().Find(y => y.YachtTitle == )
 
             Assert.IsNotNull(result);
             Assert.AreEqual(rentedYachtsInDb.Count(), result.ToList().Count());

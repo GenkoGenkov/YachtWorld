@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using YachtWorld.Core.Contracts;
-using YachtWorld.Infrastructure.Data.Common;
-using YachtWorld.Infrastructure.Data;
 using YachtWorld.Core.Services;
+using YachtWorld.Infrastructure.Data;
+using YachtWorld.Infrastructure.Data.Common;
 
 namespace YachtWorld.Tests
 {
