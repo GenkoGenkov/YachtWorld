@@ -1,1 +1,1 @@
-# YachtWorld
+# The YachtWorld is a Web application for yacht renting. Users can look at all yachts with their details, rent a yacht and look at their rented yachts. They can also become Yacht brokers. Yacht brokers can add yachts, see their details and edit and delete only yachts they added. The Admin has all privileges of Users and Yacht brokers and can see all registrations in the app and all made rents.
