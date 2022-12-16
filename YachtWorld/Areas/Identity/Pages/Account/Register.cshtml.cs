@@ -3,7 +3,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 using System.ComponentModel.DataAnnotations;
+using YachtWorld.Areas.Admin.Constants;
 using YachtWorld.Infrastructure.Data;
 
 namespace YachtWorld.Areas.Identity.Pages.Account
@@ -12,13 +14,16 @@ namespace YachtWorld.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMemoryCache cache;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IMemoryCache cache)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.cache = cache;
         }
 
         [BindProperty]
@@ -80,6 +85,8 @@ namespace YachtWorld.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    this.cache.Remove(AdminConstants.UserCacheKey);
+
                     return LocalRedirect("~/Identity/Account/Login");
                 }
 

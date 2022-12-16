@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using YachtWorld.Areas.Admin.Constants;
 using YachtWorld.Core.Constants;
 using YachtWorld.Core.Contracts;
 using YachtWorld.Core.Extensions;
@@ -19,14 +21,18 @@ namespace YachtWorld.Controllers
 
         private readonly ILogger logger;
 
+        private readonly IMemoryCache cache;
+
         public YachtController(
             IYachtService _yachtService, 
             IYachtBrokerService _yachtBrokerService,
-            ILogger<YachtController> _logger)
+            ILogger<YachtController> _logger,
+            IMemoryCache _cache)
         {
             yachtService = _yachtService;
             yachtBrokerService = _yachtBrokerService;
             logger = _logger;
+            cache = _cache;
         }
 
         [AllowAnonymous]
@@ -295,6 +301,8 @@ namespace YachtWorld.Controllers
 
             TempData[MessageConstant.SuccessMessage] = "You have successfully rented a yacht!";
 
+            cache.Remove(RentsCacheKey);
+
             return RedirectToAction(nameof(Mine));
         }
 
@@ -314,6 +322,8 @@ namespace YachtWorld.Controllers
             await yachtService.Vacate(id);
 
             TempData[MessageConstant.SuccessMessage] = "You have successfully vacated a yacht!";
+
+            cache.Remove(RentsCacheKey);
 
             return RedirectToAction(nameof(Mine));
         }

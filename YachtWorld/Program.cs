@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("Identity:RequireConfirmedAccount");
@@ -32,7 +34,6 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddApplicationServices();
 builder.Services.AddResponseCaching();
-
 
 var app = builder.Build();
 
